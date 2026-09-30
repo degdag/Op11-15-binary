@@ -1,0 +1,1342 @@
+===== 1. CURRENT STATE =====
+
+===== 2. REFS / BRANCHES =====
+
+===== 3. REflog =====
+
+===== 4. ATH12K HISTORY =====
+137-* df89e8efa10b ASoC: cs35l43: suppress log spam
+138-* c4f497928e6b SHENG: Add ps5169 node
+139-* 55d5121d576f usb: typec: Add PS5169 linear redriver driver
+140-* 7963ca0286df SHENG: Add gt9764 node
+141-* 817144fb7b20 media: i2c: dw9768: Add initial focus, custom move delay and gt9764 support
+142:* 1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+143-* a9301449ae48 SHENG: Add camera nodes and memory
+144-* b96f6b8ee85c media: i2c: Add S5KJN1 image sensor driver
+145-* 715f699f342c media: i2c: Add OV32D40 image sensor driver
+146-* 7330a1b7fa7e media: i2c: Add OV02B1B image sensor driver
+147-* 44e413855591 SHENG: Fix supply for l6m and l7m regulators
+148-* d5b056d1c804 SM8550: Add missing master1 to cci1 node
+149-* d82f92159077 SHENG: Add Secondary I2S
+150-* b979716b1201 ASoC: qcom: sc8280xp: Add Secondary I2S support
+151-* 29763178c3f2 SM8550: Fix L2 cache for CPU2 and add cache sizes
+152-* 460b1232ab0d SHENG: Fix reserved memory regions and remove unused regions Test using memtester is successful with 99.8% memory usage, nothing crashed and no access errors in hypervisor log.
+153-* e54a0094ce28 SHENG: use the PMU to power up bluetooth
+154-* 00a9f0be0410 SHENG: Add wcd9380 and sound node
+155-* bf95f737073d Input: nt36532e: Remove initial firmware update delay It's not required anymore, since panel state check was added.
+156-* 63ea74576614 Input: nt36532e: Fix broken state when display isn't fully initialized
+157-* 18bf6e3b8803 SHENG: Add Hall Effect Sensor for magnetic cover detection
+158-* da964279569d SHENG: Enable Flashlight and RGB LED support
+159-* 3c12ccac06ec Input: Add experimental nt36532e touch driver. Xiaomi's nt36532e firmware only reports raw capacitive data instead of regular touch events, so until I find out how to enable regular event parser, basic frame parser will be used, it supports only one finger and it's not really accurate.
+160-* 232537528819 SHENG: Enable GPI DMA nodes
+161-* 614608995b95 SHENG: Remove splash_region node
+162-
+163-=== 8. FULL HISTORY AROUND THE 7.3-SALAMI POINTER ===
+164-* e1e100cc5079 (7.3-salami) arm64: dts: qcom: drop the Xiaomi Pad 6S Pro (sheng) DTS
+165-* 087dce936a3a arm64: dts: qcom: sm8550-oneplus-salami: use the new pcie0_port0 label
+166-* 80ca8c83a149 drm/panel: samsung-amb670yf08: drop dsc_slice_per_pkt, 1 is the default upstream
+167-* d6a59d6e285c arm64: dts: qcom: sm8550-oneplus-salami: drop the executable bit
+168-* 95b84cf73c3b arm64: dts: qcom: sm8550-oneplus-salami: name the sound card salamisnd
+169-* 3eaf690edde0 ASoC: qcom: q6apm: use Salami VCPM calibration firmware
+170-* 3663d1708c6e ASoC: qcom: q6apm: register VCPM's transmit calibration so the vocoder sets the TX rate
+171-* 83c07a4f58ec ASoC: qcom: q6apm: gate a playback stream's right slot on its converter
+172-* 31fff87ed4d9 ASoC: qcom: audioreach: carry cross-open links declared by open graphs
+173-* cff7e4f73991 ASoC: qcom: audioreach: run the transmit voice MFCs at the vocoder rate
+174-* 7857fcba1914 ASoC: qcom: audioreach: control-link the vocoder mailboxes to endpoints
+175-* eab1d73f6090 ASoC: qcom: q6apm: open a voice RX graph and its backend in one GRAPH_OPEN
+176-* 07384c181554 ASoC: qcom: audioreach: configure data-logging modules in voice graphs
+177-* acd65ca66503 ASoC: qcom: audioreach: count the module-list header once, not per container
+178-* 3d42d4212392 ASoC: qcom: q6apm: voice bring-up fixes
+179-* f3bee9b7a05c ASoC: qcom: q6apm: drive hostless voice-call graphs
+180-* f75ea0c1f222 ASoC: qcom: audioreach: describe 24-bit PCM as 32-bit words
+181-* 28322feec1dd net: ipa: v5.5 data tweaks (QSB limits, AP_LAN_RX endpoint, imem_addr 0x146a8000) and FnR count over QMI
+182-* 15454e9c8495 arm64: dts: qcom: sm8550/salami: IPA IMEM slice and reserved-memory changes
+183-* d5778f188cb3 clk: qcom: dispcc-sm8550: don't park the MDP RCG at init
+184-* 38f8b4d96e36 iommu/arm-smmu-qcom: add SM8550 MDSS to client list
+185-* 557c3b4e31d9 fixup
+186-* 51423b50c977 fixup
+187-* 12f0d6282a97 Initial support for OnePlus 11 5G
+188-* 97321cd7f26d net: ipa: fix the v5.5 WAN downlink endpoint ids
+189-* 3eefcbf78176 Input: nt36532e: Log fw history as error
+190-* 79986902bef2 SHENG: Add DisplayPort Playback
+191-* 47249d5dd7f7 SHENG: Enable HBR3 on external DP
+192-* 9bc5cbecd344 backlight: ktz8866: Fix to actually disable LCD Bias when panel is off KTZ8866 has only VIN as power supply, ENP and ENN gpios are used to control KTZ8866 LCD Bias. Also fix for dual KTZ8866 case. Don't enable LCD Bias for Slave, since LCD Bias is only provided by Master.
+193-* d114051b390f HID: wn8030: Add offline authentication support
+194-* c69126d49279 HID: wn8030: Prevent MCU in keyboard from sleeping and improve suspend/remove safety
+195-* 926a3eca8f6f Input: nt36532e: Remove data_buf and use proper address for reading point data
+196-* 6447b678457a Input: nt36532e: Fix randomly delayed touch exit events when quickly tapping
+197-* 69456ded52df drm/msm/a6xx: Enable IFPC on Adreno 740 Same as overclocked Adreno 741
+198-* 9c51642ac580 arm64: dts: qcom: sm8550: Describe GPU_CC power plumbing requirements
+199-* aacb2e5fb61e interconnect: qcom: sm8550: Enable QoS configuration
+200-* 1ed53de9f3bb SM8550: Add missing compute context banks to CDSP node
+201-* 856cccd85f6c Input: nt36532e: Use touch data from internal event buffer instead of host processing
+202-* 5ada02d44a76 SHENG: Add rtc-offset node and enable RTC config
+203-* aa56e1ecb202 SHENG: Add nanosic_mcu node
+204-* 0f1acc28c2c7 HID: Add Nanosic WN8030 driver
+205-* 2cd55832b4ca ASoC: codecs: wcd938x: fix wcd938x_get_swr_port
+206-* 27074f2ea426 SHENG: Add iris node
+207-* df89e8efa10b ASoC: cs35l43: suppress log spam
+208-* c4f497928e6b SHENG: Add ps5169 node
+209-* 55d5121d576f usb: typec: Add PS5169 linear redriver driver
+210-* 7963ca0286df SHENG: Add gt9764 node
+211-* 817144fb7b20 media: i2c: dw9768: Add initial focus, custom move delay and gt9764 support
+212:* 1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+213-* a9301449ae48 SHENG: Add camera nodes and memory
+214-* b96f6b8ee85c media: i2c: Add S5KJN1 image sensor driver
+215-* 715f699f342c media: i2c: Add OV32D40 image sensor driver
+216-* 7330a1b7fa7e media: i2c: Add OV02B1B image sensor driver
+217-* 44e413855591 SHENG: Fix supply for l6m and l7m regulators
+218-* d5b056d1c804 SM8550: Add missing master1 to cci1 node
+219-* d82f92159077 SHENG: Add Secondary I2S
+220-* b979716b1201 ASoC: qcom: sc8280xp: Add Secondary I2S support
+221-* 29763178c3f2 SM8550: Fix L2 cache for CPU2 and add cache sizes
+222-* 460b1232ab0d SHENG: Fix reserved memory regions and remove unused regions Test using memtester is successful with 99.8% memory usage, nothing crashed and no access errors in hypervisor log.
+223-* e54a0094ce28 SHENG: use the PMU to power up bluetooth
+224-* 00a9f0be0410 SHENG: Add wcd9380 and sound node
+225-* bf95f737073d Input: nt36532e: Remove initial firmware update delay It's not required anymore, since panel state check was added.
+226-* 63ea74576614 Input: nt36532e: Fix broken state when display isn't fully initialized
+227-* 18bf6e3b8803 SHENG: Add Hall Effect Sensor for magnetic cover detection
+228-* da964279569d SHENG: Enable Flashlight and RGB LED support
+229-* 3c12ccac06ec Input: Add experimental nt36532e touch driver. Xiaomi's nt36532e firmware only reports raw capacitive data instead of regular touch events, so until I find out how to enable regular event parser, basic frame parser will be used, it supports only one finger and it's not really accurate.
+230-* 232537528819 SHENG: Enable GPI DMA nodes
+231-* 614608995b95 SHENG: Remove splash_region node
+232-* e49e31b97513 SHENG: Add ktz8866 nodes
+233-* 1a06647f80d1 backlight: ktz8866: Add hacky support for dual ktz8866
+234-* d5cf41e193f3 SHENG: Add cs35l43 nodes
+235-* 2081f35e8282 ASoC: Add cs35l43 codec driver
+236-* dabb21da47e6 qcom_battmgr: Add support for sm8550 xiaomi adsp changes
+237:* 88d4a3beb3e0 ath12k: Generate random mac address if mac in eeprom is empty.
+238:* 8703de46bcde ath12k: Disable rfkill pin for now Fixes wifi hard block issue on Pad 6S Pro.
+239-* ec4c4e1c5aae drm/msm/dsi: change sync mode to sync on DSI0 rather than DSI1
+240-* 5c66f9071ed3 SM8550: Add sm8550.config fragment
+241-* 8721038148c8 SM8550: Add device tree for Xiaomi Pad 6S Pro 12.4
+242-* 72d3fcf802c4 (tag: v7.3-rc5) Linux 7.3-rc5
+243-*   d266640c6c76 Merge tag 'driver-core-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core
+244-|\  
+245-* \   64d34cef2a32 Merge tag 'i2c-fixes-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/andi.shyti/linux
+246-|\ \  
+247-* \ \   104484baf748 Merge tag 'wq-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/wq
+248-|\ \ \  
+249-* \ \ \   b1fa457bddf0 Merge tag 'cgroup-for-7.3-rc4-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+250-|\ \ \ \  
+251-* \ \ \ \   7cdf91542e1e Merge tag 'sched_ext-for-7.3-rc4-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext
+252-|\ \ \ \ \  
+253-* \ \ \ \ \   efb44d93a620 Merge tag 'x86-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+254-|\ \ \ \ \ \  
+255-* \ \ \ \ \ \   673dab7eac16 Merge tag 'sched-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+256-|\ \ \ \ \ \ \  
+257-* \ \ \ \ \ \ \   5ccda18d1ba2 Merge tag 'perf-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+258-|\ \ \ \ \ \ \ \  
+259-| | | | | | * | | db6365ced4d5 workqueue: Fix NULL current_pwq deref in flush dependency check
+260-| | | | * | | | | 94480606a677 sched_ext: Add a size argument to scx_bpf_cid_topo() so struct scx_cid_topo can grow
+261-* | | | | | | | |   fd179f8a05be Merge tag 'ata-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/libata/linux
+262-|\ \ \ \ \ \ \ \ \  
+263-| | | | | | * | | | 31c88350b7dd cgroup/cpuset: Return PERR_NOCPUS in remote_partition_enable() on subpartitions_cpus conflict
+264-* | | | | | | | | |   fddfc3ec3179 Merge tag 'pci-v7.3-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+265-|\ \ \ \ \ \ \ \ \ \  
+266-* \ \ \ \ \ \ \ \ \ \   efb27d476773 Merge tag 'probes-fixes-v7.3-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+267-|\ \ \ \ \ \ \ \ \ \ \  
+268-* \ \ \ \ \ \ \ \ \ \ \   eff8d2791c08 Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+269-|\ \ \ \ \ \ \ \ \ \ \ \  
+270-| * \ \ \ \ \ \ \ \ \ \ \   c2f24f140c2e Merge tag 'kvm-x86-fixes-7.3-rc5' of https://github.com/kvm-x86/linux into HEAD
+271-| |\ \ \ \ \ \ \ \ \ \ \ \  
+272-| * | | | | | | | | | | | | 93de2a6a4b91 KVM: SEV: Do cache maintenance on the source VM during intra-host migration
+273-| * | | | | | | | | | | | | 12c1f6e03f94 KVM: SEV: Free have_run_cpus during VM destruction even if VM is no longer SEV
+274-* | | | | | | | | | | | | |   6812ce4e4379 Merge tag 'drm-fixes-2026-09-26' of https://gitlab.freedesktop.org/drm/kernel
+275-|\ \ \ \ \ \ \ \ \ \ \ \ \ \  
+276-* \ \ \ \ \ \ \ \ \ \ \ \ \ \   75467f60a3d1 Merge tag 'ipe-pr-20260925' of git://git.kernel.org/pub/scm/linux/kernel/git/wufan/ipe
+277-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+278-| | * \ \ \ \ \ \ \ \ \ \ \ \ \   a9ed3aa9b87e Merge tag 'drm-misc-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+279-| | |\ \ \ \ \ \ \ \ \ \ \ \ \ \  
+280-* | | \ \ \ \ \ \ \ \ \ \ \ \ \ \   049380360ca6 Merge tag 'scsi-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+281-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+282-| | * | | | | | | | | | | | | | | | 2776e9c28513 ipe: protect the dm-verity root hash with RCU
+283-| | * | | | | | | | | | | | | | | | 9814077275ec ipe: fix use-after-free when auditing a newly loaded policy
+284-* | | | | | | | | | | | | | | | | |   f14572c203d5 Merge tag 'cifs-fixes-7.3-rc5' of https://git.manguebit.org/linux
+285-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+286-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   aa98230e410f Merge tag 'vfs-7.3-rc5.fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs
+287-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+288-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   a2ff1b626e1c Merge tag 'fs_for_v7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+289-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+290-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   b9dbb658e210 Merge tag 'thermal-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+291-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+292-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   4ba51ef66a77 Merge tag 'pm-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+293-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+294-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   547463efb935 Merge tag 's390-7.3-4' of git://git.kernel.org/pub/scm/linux/kernel/git/s390/linux
+295-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+296-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   80e466f0c8ac Merge tag 'gpio-fixes-for-v7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux
+297-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+298-| | | | | | * | | | | | | | | | | | | | | | | | | b78b728e21c3 netfs: Fix missing alloc tagging of direct mempool allocations
+299-| | | | | | * | | | | | | | | | | | | | | | | | | 35d442ed1f86 bpf: fs/xattr: don't assume the inode is locked in path_unlink/path_rmdir
+300-| | | | | | * | | | | | | | | | | | | | | | | | | aa5e44b29ffe autofs: fix sbi->pipe file reference leak in autofs_kill_sb()
+301-| | | | | | | | | | | | | | * | | | | | | | | | | 5bfa9f1a9dcb kprobes: Fix permanent hang when flushing the kprobe optimizer
+302-| | | | | | * | | | | | | | | | | | | | | | | | | 76d8e697242e dcache: unpoison the inline name buffer in __d_alloc()
+303-| | | | | | * | | | | | | | | | | | | | | | | | | ae146bc1abde ovl: fix UAF in ovl_do_mkdir() debug print
+304-| | | | | | | | | | | | | | | | * | | | | | | | | 113dcdfadf30 MAINTAINERS: name the libata/linux for-next branch
+305-| | | | | | | | | | * | | | | | | | | | | | | | |   0f50dab8b426 Merge tag 'amd-drm-fixes-7.3-2026-09-24' of https://gitlab.freedesktop.org/drm/amdgpu/kernel into drm-fixes
+306-| | | | | | | | | | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+307-| | | | | | | | | | * \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   c5d1690ff144 Merge tag 'drm-xe-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+308-| | | | | | | | | | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+309-* | | | | | | | | | | \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   165768bb7026 Merge tag 'firewire-fixes-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/ieee1394/linux1394
+310-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+311-| | | | | | | | | | | * | | | | | | | | | | | | | | | | fd0ba310f9ab Merge tag 'drm-intel-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-fixes
+312-| | | | | | | | | | |/| | | | | | | | | | | | | | | | | 
+313-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   ee9c669f9bf5 Merge tag 'sched_ext-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext
+314-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+315-| | |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|/ / / / /  
+316-| |/| | | | | | | | | | | | | | | | | | | | | | | | | |   
+317-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   e8dfd03a1c51 Merge tag 'cgroup-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+318-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+319-| | |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|/ / / /  
+320-| |/| | | | | | | | | | | | | | | | | | | | | | | | | |   
+321-| | | | | | | | | | | | | | | | | | | | | | | | | | * | cb97bf3d4f91 i2c: qcom-geni: Fix hardcoded clock index in SE_GENI_CLK_SEL
+322-| | | | | | | | | | | | | |_|_|_|_|_|_|_|_|_|_|_|_|/ /  
+323-| | | | | | | | | | | | |/| | | | | | | | | | | | | |   
+324-* | | | | | | | | | | | | | | | | | | | | | | | | | |   f2c53ea949c5 Merge tag 'net-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+325-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+326-| * | | | | | | | | | | | | | | | | | | | | | | | | | | fc6d80eb5044 tcp: prevent collapsing skbs across boundary in rtx queue
+327-| * | | | | | | | | | | | | | | | | | | | | | | | | | |   1078a38344a8 Merge branch 'vlan-ensure-sufficient-headroom-in-vlan_dev_hard_header'
+328-| |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+329-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | cd5dd68267c4 vlan: ensure sufficient headroom in vlan_dev_hard_header()
+330-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 907b978e82cb net/sched: sch_teql: fix shadowed err in __teql_resolve()
+331-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | ac704ff08e51 bridge: check llc_mac_hdr_init() return value in br_send_bpdu()
+332-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 72f9dd522f8d llc: fix skb UAF and leaks on llc_mac_hdr_init() failure
+333-| |/ / / / / / / / / / / / / / / / / / / / / / / / / / /  
+334-| * | | | | | | | | | | | | | | | | | | | | | | | | | | 72b5b9a28b99 llc: reserve device headroom for allocated frames
+335-| * | | | | | | | | | | | | | | | | | | | | | | | | | |   488089055b61 Merge branch 'gve-dqo-fix-handling-of-out-of-range-tso-mss'
+336-| |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+337-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 296c83b5ccc8 gve: DQO: reject TSO packets with an out of range MSS
+338-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 3b430ea62340 gve: fix TX drop when GSO MSS is too small for hw
+339-| |/ / / / / / / / / / / / / / / / / / / / / / / / / / /  
+340-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   415f2044228c Merge tag 'landlock-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/mic/linux
+341-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+342-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 83769c23fb18 gve: DQO: fix header length used by gve_can_send_tso() for UDP GSO
+343-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 06e3f54e8b22 net: flush skb_defer_nodes in dev_cpu_dead()
+344-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 8db67bb6a1ff net: ethernet: stmmac: dwmac-rk: fix bulk clock leak when the PHY clock fails
+345-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 56d82862a0a2 af_packet: fix integer overflow in prb_calc_retire_blk_tmo()
+346-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 8e1937fed673 tipc: Fix a data race on mon->peer_cnt in mon_timeout()
+347-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | b94773dc4df7 net: phy: intel-xway: workaround 100BASE-TX Link-Up issue
+348-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 61cb282fe97b net/smc: fix UAF on lgr list traversal in smcr_port_err()
+349-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | ba3d1f480c7a net/rds: size a connection's path set by the transport it ends up with
+350-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 1a983a4e14c6 nfp: hold IPsec RX state under the XArray lock
+351-| | * | | | | | | | | | | | | | | | | | | | | | | | | | |   5b49efa1e162 Merge branch 'net-ena-fix-resource-cleanup-on-probe-failure'
+352-| | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+353-| | | * | | | | | | | | | | | | | | | | | | | | | | | | | | 9476b4468862 net: ena: fix MMIO read buffer leak on probe failure
+354-| | | * | | | | | | | | | | | | | | | | | | | | | | | | | | 0958ea4355e2 net: ena: fix PHC cleanup on probe failure
+355-| | |/ / / / / / / / / / / / / / / / / / / / / / / / / / /  
+356-| | * | | | | | | | | | | | | | | | | | | | | | | | | | |   a08b39c5d573 Merge branch 'ovs-net-sched-fixes-for-uaf-after-conntrack-extension-realloc'
+357-| | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+358-| | | * | | | | | | | | | | | | | | | | | | | | | | | | | | dad19b59da05 net/sched: act_ct: fix helper UAF due to extensions realloc
+359-
+360-=== 9. COMMITS CONTAINING REVERTS ===
+361-33de5a8680b5 (HEAD -> test-7.3-batch) Revert "bus: mhi: core: Fix sys error transition latency"
+362-3d43ee9435b7 Revert "PCI/portdrv: Allow probing even without child services"
+363-e12124b70f1b Revert "PCI: qcom: Rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()"
+364-648fe2955170 Revert "bus: mhi: host: Flush the posted write after writing to MHI_SOC_RESET_REQ_OFFSET"
+365-485b36dc19d2 Revert "PCI: qcom: Clear Attention Button Present in Slot Capabilities"
+366-34fc0423503e Revert "PCI/ASPM: Use pcie_capability_clear_and_set_word() for ASPM disable/restore"
+367-01e4f5f42fce Revert "PCI/ASPM: Disable/restore ASPM on every function for multi-function devices"
+368-0bbfdc1c0b65 Revert "PCI/ASPM: Mask ASPM states based on Devicetree properties"
+369-aac05d067525 Revert "PCI: qcom: Implement .reset_root_port() and use for link down"
+370-19277173e701 Revert "net: qrtr: Send HELLO message on endpoint register"
+371-cb9b410a03fa Revert "net: qrtr: resend HELLO on MHI resume"
+372-aa98230e410f Merge tag 'vfs-7.3-rc5.fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs
+373-fabd32421228 Merge patch series "Revert "put_mnt_ns(): leave mounts connected""
+374-2e2142a35d80 Revert "put_mnt_ns(): leave mounts connected"
+375-76ebb69da677 Revert "selftests/filesystems: add mntns cleanup test"
+376-951840561386 packet: use ubuf_info completion for TX_RING packets
+377-5271d81f99dd drm/i915/quirks: Limit eDP rate to HBR2 on HP Pavilion Plus 14-ew1
+378-1e3b08de6327 Revert "drm/virtio: Allow importing prime buffers when 3D is enabled"
+379-40288c9206c1 Merge tag 'drm-fixes-2026-09-19' of https://gitlab.freedesktop.org/drm/kernel
+380-cd011719ba56 Merge tag 'drm-intel-fixes-2026-09-17' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-fixes
+381-f81e6c3fb063 tcp: exclude old ACKs from tcp fast path
+382-fefaac1176bf Merge tag 'wireless-2026-09-16' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+383-a26204be587c Revert "drm/i915/display: Clear SEL_FETCH_PLANE_CTL on plane disable"
+384-30908e727247 Revert "KVM: arm64: vgic-its: Don't save collections the table cannot hold"
+385:ce9d5197d651 wifi: ath12k: ahb: Revert undocumented ABI and dead code
+386-525f0f99a4f7 Merge tag 'drm-fixes-2026-09-12' of https://gitlab.freedesktop.org/drm/kernel
+387-827751b699b7 Merge tag 'riscv-for-linus-7.3-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+388-a5c41fa7f925 Revert "nouveau/gsp: fix suspend/resume regression on r570 firmware"
+389-829157e762ed Revert "drm/amdgpu: debugfs: avoid extra EOLs in amdgpu_gem_info"
+390-b48513199554 Merge tag 'irq-urgent-2026-09-06' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+391-65119e86fe46 Merge tag 'pmdomain-v7.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/linux-pm
+392-e67091609cf8 Revert "irqchip/mbigen: Fix mbigen node address layout"
+393-bc35965f6940 Merge tag 'mm-hotfixes-stable-2026-09-03-17-45' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+394-0ba6912f7e97 Revert "once: don't use a work queue to reset sleepable static key"
+395-d50b6442bef6 usb: typec: mux: avoid duplicated mux switches
+396-2d2184ac9036 Revert "riscv: Reset pmm when PR_TAGGED_ADDR_ENABLE is not set"
+397-9fca7779ad18 Revert "pmdomain: qcom: rpmhpd: Add missing MXC and MMCX power domains for Eliza"
+398-045b5bef916d usb: xhci: Fix HCS_ERST_MAX conversion
+399-637836563deb Merge tag 'locking-urgent-2026-08-30' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+400-344be13211d0 Merge tag 'acpi-7.3-rc1-3' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+401-23680bf5f8c6 net: stmmac: restore NET_IP_ALIGN in the RX DMA offset
+402-3b446d169a93 Revert "ACPI: scan: Defer device power initialization"
+403-b81e34131907 Merge tag 'thermal-7.3-rc1-2' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+404-c8504fc1245f ntfs: bound $AttrDef table walk to the loaded table size
+405-aa4174127fe6 Revert "thermal/core: Allocate the thermal class dynamically"
+406-1087c29d9c5f Revert "thermal/core: Use the thermal class pointer as init guard"
+407-ce14fe4cd756 Merge tag 'cifs-fixes-7.3-rc1' of https://git.manguebit.org/linux
+408-ce31ec06d3c0 Revert "cifs: remove all cifs files before kill super"
+409-cf9610f9116d Merge tag 'pinctrl-v7.3-1' of git://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-pinctrl
+410-46094a7708b7 locking: Revert switching guards to _irq_{disable,enable}()
+411-50720728b18e Merge tag 'ipsec-2026-08-18' of git://git.kernel.org/pub/scm/linux/kernel/git/klassert/ipsec
+412-98716c9fce21 ntfs: fix off-by-one page overflow in ntfs_decompress()
+413-7711f4417f18 Merge tag 'gpio-updates-for-v7.3-rc1-v2' of git://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux
+414-cbe8aadf1551 Merge tag 'soc-dt-7.3' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+415-0fda52de8bbd Revert "esp: do not unref managed frag pages in esp_ssg_unref()"
+416-d5b95e612cde Revert "i2c: designware: defer probe if child GpioInt controllers are not bound"
+417-b26d316aaa8e Merge tag 'clk-fixes-for-linus' of git://git.kernel.org/pub/scm/linux/kernel/git/clk/linux
+418-7581e7c73e8f Merge tag 'drm-misc-fixes-2026-08-13' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+419-3aa1dcaa4f6f Revert "wifi: mt76: Disable napi when removing device"
+420-2bbea6b819be Revert "drm/sched: Switch default policy to fair"
+421-9e9da8625427 Revert "drm/sched: Remove FIFO and RR and simplify to a single run queue"
+422-67cf83ac8316 Revert "drm/sched: Embed run queue singleton into the scheduler"
+423-aa82a2530257 Revert "accel/amdxdna: Remove drm_sched_init_args->num_rqs usage"
+424-05463d54efd7 Revert "accel/rocket: Remove drm_sched_init_args->num_rqs usage"
+425-d5b15e570455 Revert "accel/ethosu: Remove drm_sched_init_args->num_rqs usage"
+426-4788c25fcd6b Revert "drm/amdgpu: Remove drm_sched_init_args->num_rqs usage"
+427-4ce955c53391 Revert "drm/etnaviv: Remove drm_sched_init_args->num_rqs usage"
+428-6c7b7e512058 Revert "drm/imagination: Remove drm_sched_init_args->num_rqs usage"
+429-b9f3f3f00bc8 Revert "drm/lima: Remove drm_sched_init_args->num_rqs usage"
+430-2683a0e7c4cc Revert "drm/msm: Remove drm_sched_init_args->num_rqs usage"
+431-5b07bcb10343 Revert "drm/nouveau: Remove drm_sched_init_args->num_rqs usage"
+432-c9126bf8fcb5 Revert "drm/panfrost: Remove drm_sched_init_args->num_rqs usage"
+433-09e6a5d433ef Revert "drm/panthor: Remove drm_sched_init_args->num_rqs usage"
+434-c41282f9ca22 Revert "drm/sched: Remove drm_sched_init_args->num_rqs usage"
+435-6ef022fbe26d Revert "drm/v3d: Remove drm_sched_init_args->num_rqs usage"
+436-482025714dba Revert "drm/xe: Remove drm_sched_init_args->num_rqs usage"
+
+===== 5. MHI HISTORY =====
+80-
+81-=== 7. RECENT HISTORY OF CURRENT BRANCH ===
+82-* 33de5a8680b5 (HEAD -> test-7.3-batch) Revert "bus: mhi: core: Fix sys error transition latency"
+83-* 3d43ee9435b7 Revert "PCI/portdrv: Allow probing even without child services"
+84-* e12124b70f1b Revert "PCI: qcom: Rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()"
+85:* 648fe2955170 Revert "bus: mhi: host: Flush the posted write after writing to MHI_SOC_RESET_REQ_OFFSET"
+86-* 485b36dc19d2 Revert "PCI: qcom: Clear Attention Button Present in Slot Capabilities"
+87-* 34fc0423503e Revert "PCI/ASPM: Use pcie_capability_clear_and_set_word() for ASPM disable/restore"
+88-* 01e4f5f42fce Revert "PCI/ASPM: Disable/restore ASPM on every function for multi-function devices"
+89-* 0bbfdc1c0b65 Revert "PCI/ASPM: Mask ASPM states based on Devicetree properties"
+90-* 4e47c8a55ce5 (test-7.3-reverts) power: sequencing: qcom-wcn: program the AOP WLAN PDC and pulse WLAN_EN
+91-* aac05d067525 Revert "PCI: qcom: Implement .reset_root_port() and use for link down"
+92-* 19277173e701 Revert "net: qrtr: Send HELLO message on endpoint register"
+93:* cb9b410a03fa Revert "net: qrtr: resend HELLO on MHI resume"
+94-* e1e100cc5079 (7.3-salami) arm64: dts: qcom: drop the Xiaomi Pad 6S Pro (sheng) DTS
+95-* 087dce936a3a arm64: dts: qcom: sm8550-oneplus-salami: use the new pcie0_port0 label
+96-* 80ca8c83a149 drm/panel: samsung-amb670yf08: drop dsc_slice_per_pkt, 1 is the default upstream
+97-* d6a59d6e285c arm64: dts: qcom: sm8550-oneplus-salami: drop the executable bit
+98-* 95b84cf73c3b arm64: dts: qcom: sm8550-oneplus-salami: name the sound card salamisnd
+99-* 3eaf690edde0 ASoC: qcom: q6apm: use Salami VCPM calibration firmware
+100-* 3663d1708c6e ASoC: qcom: q6apm: register VCPM's transmit calibration so the vocoder sets the TX rate
+101-* 83c07a4f58ec ASoC: qcom: q6apm: gate a playback stream's right slot on its converter
+102-* 31fff87ed4d9 ASoC: qcom: audioreach: carry cross-open links declared by open graphs
+103-* cff7e4f73991 ASoC: qcom: audioreach: run the transmit voice MFCs at the vocoder rate
+104-* 7857fcba1914 ASoC: qcom: audioreach: control-link the vocoder mailboxes to endpoints
+105-* eab1d73f6090 ASoC: qcom: q6apm: open a voice RX graph and its backend in one GRAPH_OPEN
+106-* 07384c181554 ASoC: qcom: audioreach: configure data-logging modules in voice graphs
+107-* acd65ca66503 ASoC: qcom: audioreach: count the module-list header once, not per container
+108-* 3d42d4212392 ASoC: qcom: q6apm: voice bring-up fixes
+109-* f3bee9b7a05c ASoC: qcom: q6apm: drive hostless voice-call graphs
+110-* f75ea0c1f222 ASoC: qcom: audioreach: describe 24-bit PCM as 32-bit words
+111-* 28322feec1dd net: ipa: v5.5 data tweaks (QSB limits, AP_LAN_RX endpoint, imem_addr 0x146a8000) and FnR count over QMI
+112-* 15454e9c8495 arm64: dts: qcom: sm8550/salami: IPA IMEM slice and reserved-memory changes
+113-* d5778f188cb3 clk: qcom: dispcc-sm8550: don't park the MDP RCG at init
+114-* 38f8b4d96e36 iommu/arm-smmu-qcom: add SM8550 MDSS to client list
+115-* 557c3b4e31d9 fixup
+116-* 51423b50c977 fixup
+117-* 12f0d6282a97 Initial support for OnePlus 11 5G
+118-* 97321cd7f26d net: ipa: fix the v5.5 WAN downlink endpoint ids
+119-* 3eefcbf78176 Input: nt36532e: Log fw history as error
+120-* 79986902bef2 SHENG: Add DisplayPort Playback
+121-* 47249d5dd7f7 SHENG: Enable HBR3 on external DP
+122-* 9bc5cbecd344 backlight: ktz8866: Fix to actually disable LCD Bias when panel is off KTZ8866 has only VIN as power supply, ENP and ENN gpios are used to control KTZ8866 LCD Bias. Also fix for dual KTZ8866 case. Don't enable LCD Bias for Slave, since LCD Bias is only provided by Master.
+123-* d114051b390f HID: wn8030: Add offline authentication support
+124-* c69126d49279 HID: wn8030: Prevent MCU in keyboard from sleeping and improve suspend/remove safety
+125-* 926a3eca8f6f Input: nt36532e: Remove data_buf and use proper address for reading point data
+126-* 6447b678457a Input: nt36532e: Fix randomly delayed touch exit events when quickly tapping
+127-* 69456ded52df drm/msm/a6xx: Enable IFPC on Adreno 740 Same as overclocked Adreno 741
+128-* 9c51642ac580 arm64: dts: qcom: sm8550: Describe GPU_CC power plumbing requirements
+129-* aacb2e5fb61e interconnect: qcom: sm8550: Enable QoS configuration
+130-* 1ed53de9f3bb SM8550: Add missing compute context banks to CDSP node
+131-* 856cccd85f6c Input: nt36532e: Use touch data from internal event buffer instead of host processing
+132-* 5ada02d44a76 SHENG: Add rtc-offset node and enable RTC config
+133-* aa56e1ecb202 SHENG: Add nanosic_mcu node
+134-* 0f1acc28c2c7 HID: Add Nanosic WN8030 driver
+135-* 2cd55832b4ca ASoC: codecs: wcd938x: fix wcd938x_get_swr_port
+136-* 27074f2ea426 SHENG: Add iris node
+137-* df89e8efa10b ASoC: cs35l43: suppress log spam
+138-* c4f497928e6b SHENG: Add ps5169 node
+139-* 55d5121d576f usb: typec: Add PS5169 linear redriver driver
+140-* 7963ca0286df SHENG: Add gt9764 node
+141-* 817144fb7b20 media: i2c: dw9768: Add initial focus, custom move delay and gt9764 support
+142-* 1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+143-* a9301449ae48 SHENG: Add camera nodes and memory
+144-* b96f6b8ee85c media: i2c: Add S5KJN1 image sensor driver
+145-* 715f699f342c media: i2c: Add OV32D40 image sensor driver
+146-* 7330a1b7fa7e media: i2c: Add OV02B1B image sensor driver
+147-* 44e413855591 SHENG: Fix supply for l6m and l7m regulators
+148-* d5b056d1c804 SM8550: Add missing master1 to cci1 node
+149-* d82f92159077 SHENG: Add Secondary I2S
+150-* b979716b1201 ASoC: qcom: sc8280xp: Add Secondary I2S support
+151-* 29763178c3f2 SM8550: Fix L2 cache for CPU2 and add cache sizes
+152-* 460b1232ab0d SHENG: Fix reserved memory regions and remove unused regions Test using memtester is successful with 99.8% memory usage, nothing crashed and no access errors in hypervisor log.
+153-* e54a0094ce28 SHENG: use the PMU to power up bluetooth
+154-* 00a9f0be0410 SHENG: Add wcd9380 and sound node
+155-* bf95f737073d Input: nt36532e: Remove initial firmware update delay It's not required anymore, since panel state check was added.
+156-* 63ea74576614 Input: nt36532e: Fix broken state when display isn't fully initialized
+157-* 18bf6e3b8803 SHENG: Add Hall Effect Sensor for magnetic cover detection
+158-* da964279569d SHENG: Enable Flashlight and RGB LED support
+159-* 3c12ccac06ec Input: Add experimental nt36532e touch driver. Xiaomi's nt36532e firmware only reports raw capacitive data instead of regular touch events, so until I find out how to enable regular event parser, basic frame parser will be used, it supports only one finger and it's not really accurate.
+160-* 232537528819 SHENG: Enable GPI DMA nodes
+161-* 614608995b95 SHENG: Remove splash_region node
+162-
+163-=== 8. FULL HISTORY AROUND THE 7.3-SALAMI POINTER ===
+164-* e1e100cc5079 (7.3-salami) arm64: dts: qcom: drop the Xiaomi Pad 6S Pro (sheng) DTS
+165-* 087dce936a3a arm64: dts: qcom: sm8550-oneplus-salami: use the new pcie0_port0 label
+166-* 80ca8c83a149 drm/panel: samsung-amb670yf08: drop dsc_slice_per_pkt, 1 is the default upstream
+167-* d6a59d6e285c arm64: dts: qcom: sm8550-oneplus-salami: drop the executable bit
+168-* 95b84cf73c3b arm64: dts: qcom: sm8550-oneplus-salami: name the sound card salamisnd
+169-* 3eaf690edde0 ASoC: qcom: q6apm: use Salami VCPM calibration firmware
+170-* 3663d1708c6e ASoC: qcom: q6apm: register VCPM's transmit calibration so the vocoder sets the TX rate
+171-* 83c07a4f58ec ASoC: qcom: q6apm: gate a playback stream's right slot on its converter
+172-* 31fff87ed4d9 ASoC: qcom: audioreach: carry cross-open links declared by open graphs
+173-* cff7e4f73991 ASoC: qcom: audioreach: run the transmit voice MFCs at the vocoder rate
+174-* 7857fcba1914 ASoC: qcom: audioreach: control-link the vocoder mailboxes to endpoints
+175-* eab1d73f6090 ASoC: qcom: q6apm: open a voice RX graph and its backend in one GRAPH_OPEN
+176-* 07384c181554 ASoC: qcom: audioreach: configure data-logging modules in voice graphs
+177-* acd65ca66503 ASoC: qcom: audioreach: count the module-list header once, not per container
+178-* 3d42d4212392 ASoC: qcom: q6apm: voice bring-up fixes
+179-* f3bee9b7a05c ASoC: qcom: q6apm: drive hostless voice-call graphs
+180-* f75ea0c1f222 ASoC: qcom: audioreach: describe 24-bit PCM as 32-bit words
+181-* 28322feec1dd net: ipa: v5.5 data tweaks (QSB limits, AP_LAN_RX endpoint, imem_addr 0x146a8000) and FnR count over QMI
+182-* 15454e9c8495 arm64: dts: qcom: sm8550/salami: IPA IMEM slice and reserved-memory changes
+183-* d5778f188cb3 clk: qcom: dispcc-sm8550: don't park the MDP RCG at init
+184-* 38f8b4d96e36 iommu/arm-smmu-qcom: add SM8550 MDSS to client list
+185-* 557c3b4e31d9 fixup
+186-* 51423b50c977 fixup
+187-* 12f0d6282a97 Initial support for OnePlus 11 5G
+188-* 97321cd7f26d net: ipa: fix the v5.5 WAN downlink endpoint ids
+189-* 3eefcbf78176 Input: nt36532e: Log fw history as error
+190-* 79986902bef2 SHENG: Add DisplayPort Playback
+191-* 47249d5dd7f7 SHENG: Enable HBR3 on external DP
+192-* 9bc5cbecd344 backlight: ktz8866: Fix to actually disable LCD Bias when panel is off KTZ8866 has only VIN as power supply, ENP and ENN gpios are used to control KTZ8866 LCD Bias. Also fix for dual KTZ8866 case. Don't enable LCD Bias for Slave, since LCD Bias is only provided by Master.
+193-* d114051b390f HID: wn8030: Add offline authentication support
+194-* c69126d49279 HID: wn8030: Prevent MCU in keyboard from sleeping and improve suspend/remove safety
+195-* 926a3eca8f6f Input: nt36532e: Remove data_buf and use proper address for reading point data
+196-* 6447b678457a Input: nt36532e: Fix randomly delayed touch exit events when quickly tapping
+197-* 69456ded52df drm/msm/a6xx: Enable IFPC on Adreno 740 Same as overclocked Adreno 741
+198-* 9c51642ac580 arm64: dts: qcom: sm8550: Describe GPU_CC power plumbing requirements
+199-* aacb2e5fb61e interconnect: qcom: sm8550: Enable QoS configuration
+200-* 1ed53de9f3bb SM8550: Add missing compute context banks to CDSP node
+201-* 856cccd85f6c Input: nt36532e: Use touch data from internal event buffer instead of host processing
+202-* 5ada02d44a76 SHENG: Add rtc-offset node and enable RTC config
+203-* aa56e1ecb202 SHENG: Add nanosic_mcu node
+204-* 0f1acc28c2c7 HID: Add Nanosic WN8030 driver
+205-* 2cd55832b4ca ASoC: codecs: wcd938x: fix wcd938x_get_swr_port
+206-* 27074f2ea426 SHENG: Add iris node
+207-* df89e8efa10b ASoC: cs35l43: suppress log spam
+208-* c4f497928e6b SHENG: Add ps5169 node
+209-* 55d5121d576f usb: typec: Add PS5169 linear redriver driver
+210-* 7963ca0286df SHENG: Add gt9764 node
+211-* 817144fb7b20 media: i2c: dw9768: Add initial focus, custom move delay and gt9764 support
+212-* 1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+213-* a9301449ae48 SHENG: Add camera nodes and memory
+214-* b96f6b8ee85c media: i2c: Add S5KJN1 image sensor driver
+215-* 715f699f342c media: i2c: Add OV32D40 image sensor driver
+216-* 7330a1b7fa7e media: i2c: Add OV02B1B image sensor driver
+217-* 44e413855591 SHENG: Fix supply for l6m and l7m regulators
+218-* d5b056d1c804 SM8550: Add missing master1 to cci1 node
+219-* d82f92159077 SHENG: Add Secondary I2S
+220-* b979716b1201 ASoC: qcom: sc8280xp: Add Secondary I2S support
+221-* 29763178c3f2 SM8550: Fix L2 cache for CPU2 and add cache sizes
+222-* 460b1232ab0d SHENG: Fix reserved memory regions and remove unused regions Test using memtester is successful with 99.8% memory usage, nothing crashed and no access errors in hypervisor log.
+223-* e54a0094ce28 SHENG: use the PMU to power up bluetooth
+224-* 00a9f0be0410 SHENG: Add wcd9380 and sound node
+225-* bf95f737073d Input: nt36532e: Remove initial firmware update delay It's not required anymore, since panel state check was added.
+226-* 63ea74576614 Input: nt36532e: Fix broken state when display isn't fully initialized
+227-* 18bf6e3b8803 SHENG: Add Hall Effect Sensor for magnetic cover detection
+228-* da964279569d SHENG: Enable Flashlight and RGB LED support
+229-* 3c12ccac06ec Input: Add experimental nt36532e touch driver. Xiaomi's nt36532e firmware only reports raw capacitive data instead of regular touch events, so until I find out how to enable regular event parser, basic frame parser will be used, it supports only one finger and it's not really accurate.
+230-* 232537528819 SHENG: Enable GPI DMA nodes
+231-* 614608995b95 SHENG: Remove splash_region node
+232-* e49e31b97513 SHENG: Add ktz8866 nodes
+233-* 1a06647f80d1 backlight: ktz8866: Add hacky support for dual ktz8866
+234-* d5cf41e193f3 SHENG: Add cs35l43 nodes
+235-* 2081f35e8282 ASoC: Add cs35l43 codec driver
+236-* dabb21da47e6 qcom_battmgr: Add support for sm8550 xiaomi adsp changes
+237-* 88d4a3beb3e0 ath12k: Generate random mac address if mac in eeprom is empty.
+238-* 8703de46bcde ath12k: Disable rfkill pin for now Fixes wifi hard block issue on Pad 6S Pro.
+239-* ec4c4e1c5aae drm/msm/dsi: change sync mode to sync on DSI0 rather than DSI1
+240-* 5c66f9071ed3 SM8550: Add sm8550.config fragment
+241-* 8721038148c8 SM8550: Add device tree for Xiaomi Pad 6S Pro 12.4
+242-* 72d3fcf802c4 (tag: v7.3-rc5) Linux 7.3-rc5
+243-*   d266640c6c76 Merge tag 'driver-core-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/driver-core/driver-core
+244-|\  
+245-* \   64d34cef2a32 Merge tag 'i2c-fixes-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/andi.shyti/linux
+246-|\ \  
+247-* \ \   104484baf748 Merge tag 'wq-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/wq
+248-|\ \ \  
+249-* \ \ \   b1fa457bddf0 Merge tag 'cgroup-for-7.3-rc4-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+250-|\ \ \ \  
+251-* \ \ \ \   7cdf91542e1e Merge tag 'sched_ext-for-7.3-rc4-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext
+252-|\ \ \ \ \  
+253-* \ \ \ \ \   efb44d93a620 Merge tag 'x86-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+254-|\ \ \ \ \ \  
+255-* \ \ \ \ \ \   673dab7eac16 Merge tag 'sched-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+256-|\ \ \ \ \ \ \  
+257-* \ \ \ \ \ \ \   5ccda18d1ba2 Merge tag 'perf-urgent-2026-09-27' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+258-|\ \ \ \ \ \ \ \  
+259-| | | | | | * | | db6365ced4d5 workqueue: Fix NULL current_pwq deref in flush dependency check
+260-| | | | * | | | | 94480606a677 sched_ext: Add a size argument to scx_bpf_cid_topo() so struct scx_cid_topo can grow
+261-* | | | | | | | |   fd179f8a05be Merge tag 'ata-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/libata/linux
+262-|\ \ \ \ \ \ \ \ \  
+263-| | | | | | * | | | 31c88350b7dd cgroup/cpuset: Return PERR_NOCPUS in remote_partition_enable() on subpartitions_cpus conflict
+264-* | | | | | | | | |   fddfc3ec3179 Merge tag 'pci-v7.3-fixes-2' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+265-|\ \ \ \ \ \ \ \ \ \  
+266-* \ \ \ \ \ \ \ \ \ \   efb27d476773 Merge tag 'probes-fixes-v7.3-rc4' of git://git.kernel.org/pub/scm/linux/kernel/git/trace/linux-trace
+267-|\ \ \ \ \ \ \ \ \ \ \  
+268-* \ \ \ \ \ \ \ \ \ \ \   eff8d2791c08 Merge tag 'for-linus' of git://git.kernel.org/pub/scm/virt/kvm/kvm
+269-|\ \ \ \ \ \ \ \ \ \ \ \  
+270-| * \ \ \ \ \ \ \ \ \ \ \   c2f24f140c2e Merge tag 'kvm-x86-fixes-7.3-rc5' of https://github.com/kvm-x86/linux into HEAD
+271-| |\ \ \ \ \ \ \ \ \ \ \ \  
+272-| * | | | | | | | | | | | | 93de2a6a4b91 KVM: SEV: Do cache maintenance on the source VM during intra-host migration
+273-| * | | | | | | | | | | | | 12c1f6e03f94 KVM: SEV: Free have_run_cpus during VM destruction even if VM is no longer SEV
+274-* | | | | | | | | | | | | |   6812ce4e4379 Merge tag 'drm-fixes-2026-09-26' of https://gitlab.freedesktop.org/drm/kernel
+275-|\ \ \ \ \ \ \ \ \ \ \ \ \ \  
+276-* \ \ \ \ \ \ \ \ \ \ \ \ \ \   75467f60a3d1 Merge tag 'ipe-pr-20260925' of git://git.kernel.org/pub/scm/linux/kernel/git/wufan/ipe
+277-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+278-| | * \ \ \ \ \ \ \ \ \ \ \ \ \   a9ed3aa9b87e Merge tag 'drm-misc-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/misc/kernel into drm-fixes
+279-| | |\ \ \ \ \ \ \ \ \ \ \ \ \ \  
+280-* | | \ \ \ \ \ \ \ \ \ \ \ \ \ \   049380360ca6 Merge tag 'scsi-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/jejb/scsi
+281-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+282-| | * | | | | | | | | | | | | | | | 2776e9c28513 ipe: protect the dm-verity root hash with RCU
+283-| | * | | | | | | | | | | | | | | | 9814077275ec ipe: fix use-after-free when auditing a newly loaded policy
+284-* | | | | | | | | | | | | | | | | |   f14572c203d5 Merge tag 'cifs-fixes-7.3-rc5' of https://git.manguebit.org/linux
+285-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+286-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   aa98230e410f Merge tag 'vfs-7.3-rc5.fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs
+287-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+288-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   a2ff1b626e1c Merge tag 'fs_for_v7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/jack/linux-fs
+289-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+290-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   b9dbb658e210 Merge tag 'thermal-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+291-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+292-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   4ba51ef66a77 Merge tag 'pm-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/rafael/linux-pm
+293-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+294-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   547463efb935 Merge tag 's390-7.3-4' of git://git.kernel.org/pub/scm/linux/kernel/git/s390/linux
+295-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+296-* \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   80e466f0c8ac Merge tag 'gpio-fixes-for-v7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/brgl/linux
+297-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+298-| | | | | | * | | | | | | | | | | | | | | | | | | b78b728e21c3 netfs: Fix missing alloc tagging of direct mempool allocations
+299-| | | | | | * | | | | | | | | | | | | | | | | | | 35d442ed1f86 bpf: fs/xattr: don't assume the inode is locked in path_unlink/path_rmdir
+300-| | | | | | * | | | | | | | | | | | | | | | | | | aa5e44b29ffe autofs: fix sbi->pipe file reference leak in autofs_kill_sb()
+301-| | | | | | | | | | | | | | * | | | | | | | | | | 5bfa9f1a9dcb kprobes: Fix permanent hang when flushing the kprobe optimizer
+302-| | | | | | * | | | | | | | | | | | | | | | | | | 76d8e697242e dcache: unpoison the inline name buffer in __d_alloc()
+303-| | | | | | * | | | | | | | | | | | | | | | | | | ae146bc1abde ovl: fix UAF in ovl_do_mkdir() debug print
+304-| | | | | | | | | | | | | | | | * | | | | | | | | 113dcdfadf30 MAINTAINERS: name the libata/linux for-next branch
+305-| | | | | | | | | | * | | | | | | | | | | | | | |   0f50dab8b426 Merge tag 'amd-drm-fixes-7.3-2026-09-24' of https://gitlab.freedesktop.org/drm/amdgpu/kernel into drm-fixes
+306-| | | | | | | | | | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+307-| | | | | | | | | | * \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   c5d1690ff144 Merge tag 'drm-xe-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/xe/kernel into drm-fixes
+308-| | | | | | | | | | |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+309-* | | | | | | | | | | \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \   165768bb7026 Merge tag 'firewire-fixes-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/ieee1394/linux1394
+310-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+311-| | | | | | | | | | | * | | | | | | | | | | | | | | | | fd0ba310f9ab Merge tag 'drm-intel-fixes-2026-09-24' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-fixes
+312-| | | | | | | | | | |/| | | | | | | | | | | | | | | | | 
+313-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   ee9c669f9bf5 Merge tag 'sched_ext-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/sched_ext
+314-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+315-| | |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|/ / / / /  
+316-| |/| | | | | | | | | | | | | | | | | | | | | | | | | |   
+317-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   e8dfd03a1c51 Merge tag 'cgroup-for-7.3-rc4-fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/tj/cgroup
+318-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+319-| | |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|/ / / /  
+320-| |/| | | | | | | | | | | | | | | | | | | | | | | | | |   
+321-| | | | | | | | | | | | | | | | | | | | | | | | | | * | cb97bf3d4f91 i2c: qcom-geni: Fix hardcoded clock index in SE_GENI_CLK_SEL
+322-| | | | | | | | | | | | | |_|_|_|_|_|_|_|_|_|_|_|_|/ /  
+323-| | | | | | | | | | | | |/| | | | | | | | | | | | | |   
+324-* | | | | | | | | | | | | | | | | | | | | | | | | | |   f2c53ea949c5 Merge tag 'net-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+325-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+326-| * | | | | | | | | | | | | | | | | | | | | | | | | | | fc6d80eb5044 tcp: prevent collapsing skbs across boundary in rtx queue
+327-| * | | | | | | | | | | | | | | | | | | | | | | | | | |   1078a38344a8 Merge branch 'vlan-ensure-sufficient-headroom-in-vlan_dev_hard_header'
+328-| |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+329-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | cd5dd68267c4 vlan: ensure sufficient headroom in vlan_dev_hard_header()
+330-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 907b978e82cb net/sched: sch_teql: fix shadowed err in __teql_resolve()
+331-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | ac704ff08e51 bridge: check llc_mac_hdr_init() return value in br_send_bpdu()
+332-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 72f9dd522f8d llc: fix skb UAF and leaks on llc_mac_hdr_init() failure
+333-| |/ / / / / / / / / / / / / / / / / / / / / / / / / / /  
+334-| * | | | | | | | | | | | | | | | | | | | | | | | | | | 72b5b9a28b99 llc: reserve device headroom for allocated frames
+335-| * | | | | | | | | | | | | | | | | | | | | | | | | | |   488089055b61 Merge branch 'gve-dqo-fix-handling-of-out-of-range-tso-mss'
+336-| |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+337-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 296c83b5ccc8 gve: DQO: reject TSO packets with an out of range MSS
+338-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 3b430ea62340 gve: fix TX drop when GSO MSS is too small for hw
+339-| |/ / / / / / / / / / / / / / / / / / / / / / / / / / /  
+340-* | | | | | | | | | | | | | | | | | | | | | | | | | | |   415f2044228c Merge tag 'landlock-7.3-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/mic/linux
+341-|\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \  
+342-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 83769c23fb18 gve: DQO: fix header length used by gve_can_send_tso() for UDP GSO
+343-| | * | | | | | | | | | | | | | | | | | | | | | | | | | | 06e3f54e8b22 net: flush skb_defer_nodes in dev_cpu_dead()
+--
+359-
+360-=== 9. COMMITS CONTAINING REVERTS ===
+361-33de5a8680b5 (HEAD -> test-7.3-batch) Revert "bus: mhi: core: Fix sys error transition latency"
+362-3d43ee9435b7 Revert "PCI/portdrv: Allow probing even without child services"
+363-e12124b70f1b Revert "PCI: qcom: Rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()"
+364:648fe2955170 Revert "bus: mhi: host: Flush the posted write after writing to MHI_SOC_RESET_REQ_OFFSET"
+365-485b36dc19d2 Revert "PCI: qcom: Clear Attention Button Present in Slot Capabilities"
+366-34fc0423503e Revert "PCI/ASPM: Use pcie_capability_clear_and_set_word() for ASPM disable/restore"
+367-01e4f5f42fce Revert "PCI/ASPM: Disable/restore ASPM on every function for multi-function devices"
+368-0bbfdc1c0b65 Revert "PCI/ASPM: Mask ASPM states based on Devicetree properties"
+369-aac05d067525 Revert "PCI: qcom: Implement .reset_root_port() and use for link down"
+370-19277173e701 Revert "net: qrtr: Send HELLO message on endpoint register"
+371:cb9b410a03fa Revert "net: qrtr: resend HELLO on MHI resume"
+372-aa98230e410f Merge tag 'vfs-7.3-rc5.fixes' of git://git.kernel.org/pub/scm/linux/kernel/git/vfs/vfs
+373-fabd32421228 Merge patch series "Revert "put_mnt_ns(): leave mounts connected""
+374-2e2142a35d80 Revert "put_mnt_ns(): leave mounts connected"
+375-76ebb69da677 Revert "selftests/filesystems: add mntns cleanup test"
+376-951840561386 packet: use ubuf_info completion for TX_RING packets
+377-5271d81f99dd drm/i915/quirks: Limit eDP rate to HBR2 on HP Pavilion Plus 14-ew1
+378-1e3b08de6327 Revert "drm/virtio: Allow importing prime buffers when 3D is enabled"
+379-40288c9206c1 Merge tag 'drm-fixes-2026-09-19' of https://gitlab.freedesktop.org/drm/kernel
+380-cd011719ba56 Merge tag 'drm-intel-fixes-2026-09-17' of https://gitlab.freedesktop.org/drm/i915/kernel into drm-fixes
+381-f81e6c3fb063 tcp: exclude old ACKs from tcp fast path
+382-fefaac1176bf Merge tag 'wireless-2026-09-16' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+383-a26204be587c Revert "drm/i915/display: Clear SEL_FETCH_PLANE_CTL on plane disable"
+384-30908e727247 Revert "KVM: arm64: vgic-its: Don't save collections the table cannot hold"
+385-ce9d5197d651 wifi: ath12k: ahb: Revert undocumented ABI and dead code
+386-525f0f99a4f7 Merge tag 'drm-fixes-2026-09-12' of https://gitlab.freedesktop.org/drm/kernel
+387-827751b699b7 Merge tag 'riscv-for-linus-7.3-rc3' of git://git.kernel.org/pub/scm/linux/kernel/git/riscv/linux
+388-a5c41fa7f925 Revert "nouveau/gsp: fix suspend/resume regression on r570 firmware"
+389-829157e762ed Revert "drm/amdgpu: debugfs: avoid extra EOLs in amdgpu_gem_info"
+390-b48513199554 Merge tag 'irq-urgent-2026-09-06' of git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip
+391-65119e86fe46 Merge tag 'pmdomain-v7.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/ulfh/linux-pm
+392-e67091609cf8 Revert "irqchip/mbigen: Fix mbigen node address layout"
+393-bc35965f6940 Merge tag 'mm-hotfixes-stable-2026-09-03-17-45' of git://git.kernel.org/pub/scm/linux/kernel/git/akpm/mm
+
+===== 6. QRTR HISTORY =====
+885-6dbd496a170b wifi: ath12k: add WMI support for spatial reuse parameter configuration
+886-303c1a66a220 Merge tag 'wireless-next-2026-01-29' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+887-dbd91d4f55ac Merge 6.19-rc7 into char-misc-next
+888-9abf22075da9 Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+889-d8e1f4a19310 wifi: ath12k: enable QCC2072 support
+890:853deed04be3 wifi: ath12k: fix PCIE_LOCAL_REG_QRTR_NODE_ID definition for QCC2072
+891-d6c5d412f600 wifi: ath12k: send peer meta data version to firmware
+892-d518b2d601ac wifi: ath12k: limit number of channels per WMI command
+893-37b34a1c545a wifi: ath12k: handle REO status ring for QCC2072
+894-b7ffeb0f62fd wifi: ath12k: handle REO CMD ring for QCC2072
+895-023ace9f9232 wifi: ath12k: add hardware ops support for QCC2072
+896-28badc78142e wifi: ath12k: add HAL descriptor and ops for QCC2072
+897-b065ccf4193e wifi: ath12k: support downloading auxiliary ucode image for QCC2072
+898-68cc3ac88118 wifi: ath12k: support LPASS_SHARED target memory type
+899-12048e2c052b wifi: ath12k: add hardware parameters for QCC2072
+900-089e0e746d59 wifi: ath12k: add hardware registers for QCC2072
+901-b5151c9b6e3a wifi: ath12k: fix mac phy capability parsing
+902-6281d4f4df22 wifi: ath12k: refactor 320 MHz bandwidth support parsing
+903-7f852de00032 wifi: ath12k: fix preferred hardware mode calculation
+904-1f165022d5f0 wifi: ath12k: refactor REO status ring handling
+905-9615a6727e9d wifi: ath12k: refactor REO CMD ring handling
+906-7a6b6386deb7 wifi: ath12k: refactor PCI window register access
+907-e62102ac9b77 wifi: ath12k: do WoW offloads only on primary link
+908-40feb23c7263 wifi: ath12k: clean up on error in ath12k_dp_setup()
+909-8fb264d1a0c5 wifi: ath12k: remove redundant pci_set_drvdata() call
+910-9269caf5a7ff wifi: ath11k: fix comment typo in monitor mode handling
+911-31707572108d wifi: ath12k: Fix wrong P2P device link id issue
+912-f88e9fc30a26 wifi: ath12k: fix dead lock while flushing management frames
+913-8b8d6ee53dfd wifi: ath12k: Fix scan state stuck in ABORTING after cancel_remain_on_channel
+914-39c90b1a1dbe wifi: ath12k: cancel scan only on active scan vdev
+915-1fed08c5519d wifi: ath12k: don't force radio frequency check in freq_to_idx()
+916-bb97131fbf9b wifi: ath12k: fix dma_free_coherent() pointer
+917-51731792a25c net: qrtr: Drop the MHI auto_queue feature for IPCR DL channels
+918-631ee338f04d Merge branch 'ath12k-ng' into ath-next
+919-5a58414fe107 wifi: ath12k: Skip DP peer creation for scan vdev
+920-a1e19289932a wifi: ath12k: move firmware stats request outside of atomic context
+921-5a384854d81f wifi: ath12k: add the missing RCU lock in ath12k_dp_tx_free_txbuf()
+922-0eb272033b64 Merge tag 'ath-next-20251111' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+923-7cd7392a0778 wifi: ath12k: Remove Wi-Fi 7 header dependencies from common ath12k module
+924-965aea91545a wifi: ath12k: Move MSDU END TLV processing to Wi-Fi 7 module
+925-5db19c488413 wifi: ath12k: Move MU user processing to Wi-Fi 7 module
+926-e5419861e415 wifi: ath12k: Move remaining SIG TLV parsing to Wi-Fi 7 module
+927-00b67b7c44b4 wifi: ath12k: Move EHT SIG processing to Wi-Fi 7 module
+928-dde5748c2940 wifi: ath12k: Move HE SIG processing to Wi-Fi 7 module
+929-f4bcbaebf411 wifi: ath12k: Move HT/VHT SIG processing to Wi-Fi 7 module
+930-52758ff7b50a wifi: ath12k: Move TX monitor functionality to Wi-Fi 7 module
+931-e475119ba251 wifi: ath12k: Move RX status TLV parsing to Wi-Fi 7 module
+932-906b5ac9c2b5 wifi: ath12k: Move MPDU pop functionality to Wi-Fi 7 module
+933-e00164657ce8 wifi: ath12k: Move monitor status processing to Wi-Fi 7 module
+934-24b21a9be2c9 wifi: ath12k: Move monitor ring processing to Wi-Fi 7 module
+935-1ec9871fbb80 Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+936-2977567b244f wifi: ath12k: Fix timeout error during beacon stats retrieval
+937-bd6ec8111e65 wifi: ath12k: Make firmware stats reset caller-driven
+938-9b73cdad5889 Merge tag 'wireless-next-2025-11-05' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+939-2f6adeaf92c4 Merge tag 'ath-next-20251103' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath into wireless-next
+940-f87034a7576f wifi: ath12k: Replace lock/unlock with guard()
+941-96b42732bc75 wifi: ath12k: Use dp objects in performance critical paths
+942-219dd14992fc wifi: ath12k: Build all the files in wifi7 directory into ath12k_wifi7.ko
+943-951cca9cc68d wifi: ath12k: Remove arch-specific HAL dependencies from common DP
+944-147daefc59f0 wifi: ath12k: Move ath12k_dp_rx_get_peer_id API to Wi-Fi 7
+945-d43133a38b0c wifi: ath12k: Move ath12k_dp_rx_frags_cleanup API to Wi-Fi 7
+946-c87060251024 wifi: ath12k: Remove the wifi7 header inclusions in common code
+947-c26f294fef2a wifi: ath12k: Move ieee80211_ops callback to the arch specific module
+948-05774dffb974 wifi: ath12k: Add helper to free DP link peer
+949-35fcf4fa196c wifi: ath12k: Move DP specific link stats to DP link peer
+950-775fe5acc18d wifi: ath12k: Move DP device stats to ath12k_dp
+951-73c928346d09 wifi: ath12k: Add callbacks in arch_ops for rx APIs
+952-85cb0757d7e1 net: Convert proto_ops connect() callbacks to use sockaddr_unsized
+953-e70515039d44 wifi: ath12k: unassign arvif on scan vdev create failure
+954-448bf7b51426 wifi: ath12k: enforce vdev limit in ath12k_mac_vdev_create()
+955-09486128caef wifi: ath12k: Set EHT fixed rates for associated STAs
+956-5ee9cb2c236b wifi: ath12k: add EHT rates to ath12k_mac_op_set_bitrate_mask()
+957-ab31a9b73c95 wifi: ath12k: Add EHT fixed GI/LTF
+958-6c95151e2e77 wifi: ath12k: Add EHT MCS/NSS rates to Peer Assoc
+959-ec1d9b79be5d wifi: ath12k: add EHT rate handling to existing set rate functions
+960-770bff79424b wifi: ath12k: generalize GI and LTF fixed rate functions
+961-088a099690e4 wifi: ath12k: fix error handling in creating hardware group
+962-00575bb44b2c wifi: ath12k: fix reusing m3 memory
+963-be5febd51c47 wifi: ath12k: fix potential memory leak in ath12k_wow_arp_ns_offload()
+964-9222582ec524 Revert "wifi: ath12k: Fix missing station power save configuration"
+965-6633dca572d8 wifi: ath12k: Add lockdep warn for RCU
+966-11157e0910fd wifi: ath12k: Use ath12k_dp_peer in per packet Tx & Rx paths
+967-5525f12fa671 wifi: ath12k: Attach and detach ath12k_dp_link_peer to ath12k_dp_peer
+968-ee16dcf573d5 wifi: ath12k: Define ath12k_dp_peer structure & APIs for create & delete
+969-a88cf5f71adf wifi: ath12k: Add hash table for ath12k_dp_link_peer
+970-0cafe8cc8566 wifi: ath12k: Move ath12k_dp_link_peer list from ath12k_base to ath12k_dp
+971-57ccca410237 wifi: ath12k: Add hash table for ath12k_link_sta in ath12k_base
+972-9e0b56a33384 wifi: ath12k: Rename ath12k_peer to ath12k_dp_link_peer
+973-07174dc94269 wifi: ath12k: Move DP related functions from peer.c to dp_peer.c file
+974-197498315de7 wifi: ath12k: Assert base_lock is held before allocating REO update element
+975-a41281f6518e wifi: ath12k: restore register window after global reset
+976-f7746cfcdbc5 wifi: ath12k: add support for BSS color change
+977-d36978846728 Merge tag 'ath-current-20251006' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+978-38e3a9408496 wifi: ath12k: Add MODULE_FIRMWARE() entries
+979-9c5f229b1312 wifi: ath12k: fix TX and RX MCS rate configurations in HE mode
+980-8c21b32c2cc8 wifi: ath12k: fix VHT MCS assignment
+981-b94f523cc5a1 wifi: ath12k: Fix NSS value update in ext_rx_stats
+982-6917e268c433 wifi: ath12k: Defer vdev bring-up until CSA finalize to avoid stale beacon
+983-43ba986e7ac7 wifi: ath12k: track dropped MSDU buffer type packets in REO exception ring
+984-36f9edbb9d0f wifi: ath12k: Fix MSDU buffer types handling in RX error path
+985-d34a368be24d wifi: ath12k: Remove struct wmi_bcn_send_from_host_cmd
+986-25122460e7f9 wifi: ath12k: Drop hal_ prefix from hardware register names
+987-49ba5debad42 wifi: ath12k: Rename hal_ops to ops
+988-6250af607309 wifi: ath12k: Remove the unused ring inits in wcn
+989-2bb41934527d wifi: ath12k: Segregate the common and wifi7 specific structures
+990-ea23813a2e44 wifi: ath12k: Move HAL Cookie Conversion and RBM related APIs to wifi7 directory
+991-17540a7c9b36 wifi: ath12k: Move HAL REO and Rx buf related APIs to wifi7 directory
+992-356942d328a4 wifi: ath12k: Move HAL Tx, REO and link idle setup related APIs to wifi7 directory
+993-eba935ec922f wifi: ath12k: Move HAL CE status and set link desc addr APIs to wifi7 directory
+994-3d947cef0a51 wifi: ath12k: Move HAL CE desc related APIs to wifi7 directory
+995-cb419f582f36 wifi: ath12k: Move HAL SRNG shadow config and get ring id APIs to wifi7 directory
+996-e9f00e22963e wifi: ath12k: Move HAL CE setup and SRNG related APIs to wifi7 directory
+997-b38213660ab9 wifi: ath12k: Use hal handle instead of ab handle
+998-a337bff1db71 wifi: ath12k: Add direct HAL pointer in ath12k_dp
+999-492dea1892da wifi: ath12k: Move hal_params and regs to hal from hw
+1000-1c1d4b491d20 wifi: ath12k: Move wbm_rbm_map to hw specific hal files
+1001-369cb192c2ec wifi: ath12k: Initialize hal_ops through hal_init
+1002-74ed243dad18 wifi: ath12k: Initialize desc_size through hal_init
+1003-c0600b35e08d wifi: ath12k: Move srng config and hal_ops to hw specific hal files
+1004-c57176c0dad9 wifi: ath12k: Rearrange PPDU radio stats
+1005-9e0ee04f818f wifi: ath12k: Refactor data path pdev struct
+1006-92282074e1d2 wifi: ath12k: free skb during idr cleanup callback
+1007-07fdad3a9375 Merge tag 'net-next-6.18' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+1008-38057e323657 Merge tag 'soc-drivers-6.18' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+1009-af66c7640cf9 wifi: ath12k: Refactor ath12k_vif structure
+1010-39538dc8860a wifi: ath12k: Add framework for hardware specific DP interrupt handler
+1011-914c890d3b90 wifi: ath12k: Add framework for hardware specific ieee80211_ops registration
+1012-8042e30acd1f wifi: ath12k: Rearrange DP fields in ath12k_hw_group struct
+1013-614c23e24ee8 wifi: ath12k: Support arch-specific DP device allocation
+1014-3a52762b539f wifi: ath12k: Convert ath12k_dp member in ath12k_base to pointer
+1015-9eb6f553026e wifi: ath12k: enforce CPU endian format for all QMI data
+1016-b706fb4e580b wifi: ath12k: Use 1KB Cache Flush Command for QoS TID Descriptors
+1017-
+1018-=== 13. ATH12K COMMITS MATCHING KEYWORDS ===
+1019-4e47c8a55ce5 (test-7.3-reverts) power: sequencing: qcom-wcn: program the AOP WLAN PDC and pulse WLAN_EN
+1020-1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+1021-88d4a3beb3e0 ath12k: Generate random mac address if mac in eeprom is empty.
+1022-8703de46bcde ath12k: Disable rfkill pin for now Fixes wifi hard block issue on Pad 6S Pro.
+1023-6a5719cc3ef2 net: qrtr: resend HELLO on MHI resume
+1024-fefaac1176bf Merge tag 'wireless-2026-09-16' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+1025-769ec67d0abc Merge tag 'ath-current-20260914' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1026-ce9d5197d651 wifi: ath12k: ahb: Revert undocumented ABI and dead code
+1027-91ec20351349 Merge tag 'net-next-7.3' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+1028-ca56ac35a72e ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+1029-fc2ad11f9435 ath12k: Generate random mac address if mac in eeprom is empty.
+1030-e411f94b846b ath12k: Disable rfkill pin for now Fixes wifi hard block issue on Pad 6S Pro.
+1031-6da796747eeb arm64: dts: qcom: sm8650-oneplus-giulia: wire up Bluetooth
+1032-cf81f0a3db2a Bluetooth: btqca: Fix qca_set_bdaddr() waiting for wrong HCI event
+1033-4fa4977a0d90 Merge tag 'wireless-next-2026-08-06' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+1034-0307efd32f29 Merge tag 'ath-next-20260803' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1035-a9477331f26f wifi: ath12k: wcn7850: send the MLO host capability the firmware requires
+1036-c07b9ee39f9d wifi: ath12k: wcn7850: download the QDSS trace configuration
+1037-998dd35eaac9 wifi: ath12k: wcn7850: align the QMI/WMI host contract with downstream
+1038-9347b5161409 PCI: qcom: sm8650: replay downstream's CESTA/CRM programming and D0 vote
+1039-6e62a11693ae power: sequencing: qcom-wcn: program the AOP WLAN PDC and pulse WLAN_EN
+1040-4f25071afe92 wifi: ath10k: snoc: use memcpy_fromio() for MSA ramdump
+1041-1e33f8acd837 wifi: ath12k: fix encrypted EAPOL TX in encap offload mode
+1042-5c458073553f Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+1043-2812e64e1575 Merge tag 'net-7.2-rc6' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+1044-4c6eb712a91f wifi: ath12k: fix stride mismatch in mac_phy_caps_parse()
+1045-82f0e98ba302 Merge tag 'wireless-2026-07-29' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+1046-c6ab3b1dfa3e wifi: ath12k: Share RootPD state across UserPDs to avoid duplicate operations
+1047-96f46607bbce wifi: ath12k: add AHB platform descriptor support
+1048-43c521c11ce8 wifi: ath12k: skip MLO multicast links during crash recovery in Tx path
+1049-534459ac562b wifi: ath12k: Use different RX release ring sizes as per memory profiles
+1050-0090ec7ad252 wifi: ath12k: rename firmware_mode enum members to use QMI namespace
+1051-0702eddffff1 wifi: ath12k: move firmware_mode enum to qmi.h
+1052-8e415b806848 wifi: ath12k: validate TLV length in process_tpc_stats()
+1053-208d7fdb8597 wifi: ath11k: fix overreads in ath11k_wmi_process_csa_switch_count_event()
+1054-878654eb78c6 wifi: ath12k: fix overreads in ath12k_wmi_process_csa_switch_count_event()
+1055-650a21e0bfe4 Merge tag 'ath-current-20260727' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1056-edc84a9396ac Merge tag 'wireless-2026-07-26' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+1057-469d7e6077c1 wifi: ath12k: resolve PENDING ML peer ID from MLO_PEER_MAP HTT event
+1058-a7619b3bcba4 wifi: ath12k: defer dp_peer registration when firmware allocates MLD peer ID
+1059-1726a7a10c4f wifi: ath12k: do not advertise MLD peer ID for firmware-allocate devices
+1060-378e659029d5 wifi: ath12k: introduce host_alloc_ml_id hardware parameter
+1061-a08455ee85a2 wifi: ath12k: add support for HTT_T2H_MSG_TYPE_MLO_RX_PEER_MAP
+1062-dd121ed779dd wifi: ath12k: keep ATH12K_PEER_ML_ID_VALID set in ath12k_sta::ml_peer_id
+1063-21ca38bb6b53 wifi: ath12k: factor out peer assoc send-and-wait into a helper
+1064-47abd2ca2815 wifi: ath12k: fix out-of-bounds clear_bit in ath12k_mac_dp_peer_cleanup()
+1065-d326f83e819c Merge tag 'net-7.2-rc5' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+1066-90883c513ca0 Merge tag 'ath-next-20260722' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1067-fec15bb3dab0 Merge tag 'wireless-2026-07-22' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+1068-9ef9dd30058c wifi: ath11k: Avoid buffer overread in ath11k_wmi_tlv_op_rx()
+1069-7698656a2f7b wifi: ath12k: Avoid buffer overread in ath12k_wmi_op_rx()
+1070-c42b27336eef wifi: ath12k: fix survey indexing across bands
+1071-af50baccaa5f wifi: ath12k: Set DTIM policy to stick mode for station interface
+1072-d6850f1984eb wifi: ath12k: Constify struct ath12k_dp_arch_ops
+1073-6c90f68f97de wifi: ath12k: fix scan command endianness on big endian
+1074-6fe2dddf59bb wifi: ath11k: Correctly copy the hint BSSID in WMI scan request
+1075-7b0bd40e97a0 wifi: ath12k: Correctly copy the hint BSSID in WMI scan request
+1076-42399be44b13 wifi: ath12k: allocate HOST_DDR and BDF regions after Q6 RO region
+1077-ecb517f97e62 wifi: ath12k: refactor QMI memory assignment
+1078-3fe59edd1901 wifi: ath12k: switch to name-based reserved memory lookup
+1079-e23d90cfcbe2 wifi: ath12k: Set congestion control max MSDU count
+1080-408ec3ffcc76 wifi: ath12k: update IPQ5332 BDF address offset
+1081-ff651212f2e2 wifi: ath12k: fix ML-STA authentication timeout on QCC2072
+1082-be72d6aecea4 wifi: ath12k: Set IEEE80211_OFFLOAD_ENCAP_4ADDR after tx_encap_type vdev param
+1083-b55a04ebb52d Merge tag 'ath-current-20260713' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1084-b93c1dc44684 wifi: ath12k: add QMI capability negotiation for dynamic memory mode
+1085-9eb29fd47595 wifi: ath12k: fix rx_mpdu_start layout for QCC2072
+1086-6b31c3451b12 wifi: ath12k: Reduce RX SRNG interrupt timer threshold to 200us
+1087-6385fd09a399 wifi: ath12k: Fix ath12k_wifi7_mac_op_tx() style issues
+1088-01cc0f59aac3 wifi: ath12k: fix MLO peer delete race
+1089-f066e1a93703 wifi: ath12k: fix dp_link_peer dangling references on AP vdev rollback
+1090-d418509383b0 wifi: ath12k: Switch to generic PAS TZ APIs
+--
+1237-a410d3fb30d9 Merge tag 'ath-next-20260120' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1238-9abf22075da9 Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+1239-0a80e38d0fe1 Merge tag 'net-6.19-rc7' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+1240-9146fe282990 Merge tag 'wireless-2026-11-22' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+1241-d8e1f4a19310 wifi: ath12k: enable QCC2072 support
+1242:853deed04be3 wifi: ath12k: fix PCIE_LOCAL_REG_QRTR_NODE_ID definition for QCC2072
+1243-d6c5d412f600 wifi: ath12k: send peer meta data version to firmware
+1244-d518b2d601ac wifi: ath12k: limit number of channels per WMI command
+1245-37b34a1c545a wifi: ath12k: handle REO status ring for QCC2072
+1246-b7ffeb0f62fd wifi: ath12k: handle REO CMD ring for QCC2072
+1247-023ace9f9232 wifi: ath12k: add hardware ops support for QCC2072
+1248-28badc78142e wifi: ath12k: add HAL descriptor and ops for QCC2072
+1249-b065ccf4193e wifi: ath12k: support downloading auxiliary ucode image for QCC2072
+1250-68cc3ac88118 wifi: ath12k: support LPASS_SHARED target memory type
+1251-12048e2c052b wifi: ath12k: add hardware parameters for QCC2072
+1252-089e0e746d59 wifi: ath12k: add hardware registers for QCC2072
+1253-b5151c9b6e3a wifi: ath12k: fix mac phy capability parsing
+1254-6281d4f4df22 wifi: ath12k: refactor 320 MHz bandwidth support parsing
+1255-7f852de00032 wifi: ath12k: fix preferred hardware mode calculation
+1256-1f165022d5f0 wifi: ath12k: refactor REO status ring handling
+1257-9615a6727e9d wifi: ath12k: refactor REO CMD ring handling
+1258-7a6b6386deb7 wifi: ath12k: refactor PCI window register access
+1259-e62102ac9b77 wifi: ath12k: do WoW offloads only on primary link
+1260-40feb23c7263 wifi: ath12k: clean up on error in ath12k_dp_setup()
+1261-8fb264d1a0c5 wifi: ath12k: remove redundant pci_set_drvdata() call
+1262-e7df8567878f Merge tag 'ath-current-20260113' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath into wireless
+1263-31707572108d wifi: ath12k: Fix wrong P2P device link id issue
+1264-f88e9fc30a26 wifi: ath12k: fix dead lock while flushing management frames
+1265-8b8d6ee53dfd wifi: ath12k: Fix scan state stuck in ABORTING after cancel_remain_on_channel
+1266-39c90b1a1dbe wifi: ath12k: cancel scan only on active scan vdev
+1267-669aa3e3faa8 Merge tag 'wireless-next-2026-01-12' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+1268-1fed08c5519d wifi: ath12k: don't force radio frequency check in freq_to_idx()
+1269-bb97131fbf9b wifi: ath12k: fix dma_free_coherent() pointer
+1270-4ea5bebe17ba Merge tag 'ath-next-20260105' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1271-631ee338f04d Merge branch 'ath12k-ng' into ath-next
+1272-5a58414fe107 wifi: ath12k: Skip DP peer creation for scan vdev
+1273-8f7aa3d3c732 Merge tag 'net-next-6.19' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net-next
+1274-eba81b0a6de3 net: dsa: cpu_dp->orig_ethtool_ops might be NULL
+1275-a1e19289932a wifi: ath12k: move firmware stats request outside of atomic context
+1276-5a384854d81f wifi: ath12k: add the missing RCU lock in ath12k_dp_tx_free_txbuf()
+1277-e949824730da Merge tag 'wireless-next-2025-11-12' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+1278-0eb272033b64 Merge tag 'ath-next-20251111' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+1279-7cd7392a0778 wifi: ath12k: Remove Wi-Fi 7 header dependencies from common ath12k module
+
+===== 7. CURRENT BRANCH COMMITS TOUCHING WIFI/MHI =====
+2552-d697e9067248 PCI: dwc: Add dw_pcie_program_t_power_on() to program T_POWER_ON
+2553-1a23bcb452d9 PCI: qcom: Handle mixed PERST#/PHY DT configuration
+2554-
+2555---- drivers/pci/quirks ---
+2556-
+2557:=== 17. CURRENT BRANCH COMMITS TOUCHING ATH12K/MHI/QRTR ===
+2558-33de5a8680b5 (HEAD -> test-7.3-batch) Revert "bus: mhi: core: Fix sys error transition latency"
+2559-e12124b70f1b Revert "PCI: qcom: Rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()"
+2560-648fe2955170 Revert "bus: mhi: host: Flush the posted write after writing to MHI_SOC_RESET_REQ_OFFSET"
+2561-485b36dc19d2 Revert "PCI: qcom: Clear Attention Button Present in Slot Capabilities"
+2562-aac05d067525 Revert "PCI: qcom: Implement .reset_root_port() and use for link down"
+2563-19277173e701 Revert "net: qrtr: Send HELLO message on endpoint register"
+2564-cb9b410a03fa Revert "net: qrtr: resend HELLO on MHI resume"
+2565-1f67f2a0258f ath12k: Force Single Chip MLO support to fix firmware boot Booting new firmwares like "WLAN.HMT.1.1.c2-00259-QCAHMTSWPL_V1.0_V2.0_SILICONZ-1" is broken since https://github.com/torvalds/linux/commit/46d16f7e1d1413ad7ff99c1334d8874623717745 commit, so force enable single chip MLO like it was before.
+2566-88d4a3beb3e0 ath12k: Generate random mac address if mac in eeprom is empty.
+2567-8703de46bcde ath12k: Disable rfkill pin for now Fixes wifi hard block issue on Pad 6S Pro.
+2568-6a5719cc3ef2 net: qrtr: resend HELLO on MHI resume
+2569-ef31d04b6d8a Merge tag 'pci-v7.3-fixes-1' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+2570-c9dc7d730319 PCI: imx6: Move clock enable after core reset assertion
+2571-fefaac1176bf Merge tag 'wireless-2026-09-16' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+2572-ce9d5197d651 wifi: ath12k: ahb: Revert undocumented ABI and dead code
+2573-3a2c4d55e32a treewide: refresh kmalloc_obj() conversions
+2574-544d85de4dc2 net: qrtr: Send HELLO message on endpoint register
+2575-5e6ff28676dd Merge tag 'hyperv-next-signed-20260826' of git://git.kernel.org/pub/scm/linux/kernel/git/hyperv/linux
+2576-93e4b3076b5f Merge tag 'char-misc-7.3-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+2577-86bdd16e8f39 PCI: hv: Set irq_retrigger callback for the Hyper-V PCI MSI irqchip
+2578-570f7e331f5f Merge tag 'pci-v7.3-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+2579-9324becc398a Merge branch 'pci/misc'
+2580-70cbec6fec2c Merge branch 'pci/controller/misc'
+2581-25a22c9078d2 Merge branch 'pci/controller/xgene'
+2582-e0aba454f87a Merge branch 'pci/controller/vmd'
+2583-b130a2caf5d3 Merge branch 'pci/controller/tegra264'
+2584-003bb33da95b Merge branch 'pci/controller/rzg3s-host'
+2585-707ba6063c47 Merge branch 'pci/controller/mediatek'
+2586-2d022e66d5d9 Merge branch 'pci/controller/plda-starfive'
+2587-e6859eee417d Merge branch 'pci/controller/plda-host'
+2588-3d3fce943508 Merge branch 'pci/controller/dwc-ultrarisc'
+2589-2a66fae91e35 Merge branch 'pci/controller/dwc-spacemit-k1'
+2590-45b3d1baf4d6 Merge branch 'pci/controller/dwc-rcar-gen4'
+2591-157936259499 Merge branch 'pci/controller/dwc-qcom'
+2592-9bb52aa1972d Merge branch 'pci/controller/dwc-meson'
+2593-ab345fad8f7f Merge branch 'pci/controller/dwc-keystone'
+2594-3e01ebb61957 Merge branch 'pci/controller/dwc-imx6'
+2595-71aabbe6d49b Merge branch 'pci/controller/dwc'
+2596-4bba1f93069e Merge branch 'pci/controller/cadence'
+2597-1ef0f8a7f084 Merge branch 'pci/controller/aspeed'
+2598-c4afb0b2d334 Merge branch 'pci/controller/host-generic'
+2599-55aa45154fe4 PCI: vmd: Add Nova Lake (NVL) and Dunlow (DNL) Device IDs
+2600-01c3c27a0ef6 PCI: tegra264: Add Tegra264 support
+2601-c1366b72ad4e PCI: dwc: Handle return value from endpoint .pre_init callback
+2602-face36545741 PCI: dwc: Handle return value from endpoint .init callback
+2603-22a415e623e9 PCI: ultrarisc: Use module_platform_driver()
+2604-e152c295d32a PCI: ultrarisc: Get and enable DP1000 PCIe controller clocks
+2605-70200b99a36e Merge tag 'mhi-for-v7.3' of ssh://gitolite.kernel.org/pub/scm/linux/kernel/git/mani/mhi into char-misc-next
+2606-4fa4977a0d90 Merge tag 'wireless-next-2026-08-06' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+2607-1962afd21159 Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+2608-315f4bd234b3 Merge tag 'net-7.2-rc7' of git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+2609-79752653c136 PCI: cadence: Fix host/endpoint dependencies for cadence-plat driver
+2610-7fc1c937b6b3 net: qrtr: ns: Raise lookup limit to 128
+2611-0307efd32f29 Merge tag 'ath-next-20260803' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+2612-b376b3ff9cb0 PCI: dw-rockchip: Implement .reset_root_port() and use for link down
+2613-4d88cb82a6d9 PCI: qcom: Implement .reset_root_port() and use for link down
+2614-9de09b807a19 PCI: dwc: ep: Fix unmap potentially unmapping the wrong iATU
+2615-1b01d725d8b4 PCI: dwc: ep: Flush cached MSI write before unmapping the iATU
+2616-3a006d09a21d Merge tag 'rtw-next-2026-08-02' of https://github.com/pkshih/rtw
+2617-1e33f8acd837 wifi: ath12k: fix encrypted EAPOL TX in encap offload mode
+2618-ce3294cef61c PCI: Use %pe format specifier to print error pointers
+2619-4c99bace4f4e PCI: host-common: Add link down handling for Root Ports
+2620-596254ecc5b7 Merge tag 'pci-v7.2-fixes-1' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+2621-65ccb2203ef8 PCI: qcom: Clear Attention Button Present in Slot Capabilities
+2622-5c458073553f Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+2623-36637958726a PCI: dwc: ep: Clear MSI iATU mapping in dw_pcie_ep_cleanup()
+2624-4c6eb712a91f wifi: ath12k: fix stride mismatch in mac_phy_caps_parse()
+2625-5993e10b82a4 bus: mhi: ep: Flush async transfers before notifying disconnect in mhi_ep_abort_transfer()
+2626-7cc5ddce0a62 bus: mhi: ep: Add mhi_cntrl->flush_async() callback to flush the async read/write
+2627-0d5b9e66591d bus: mhi: host: Fix controller cleanup on EDL sysfs failure
+2628-5fe63c1bba57 bus: mhi: pci_generic: Add SAHARA channel support for Foxconn products
+2629-0936a8780ec2 bus: mhi: host: pci_generic: Set 'mhi_cntrl->no_m3' flag
+2630-753aa72545ce bus: mhi: host: Add support for devices with no M3 state
+2631-24f4423cbc89 bus: mhi: host: Flush the posted write after writing to MHI_SOC_RESET_REQ_OFFSET
+2632-aaae91799062 PCI: starfive: Fix unchecked pm_runtime_get_sync() in probe
+2633-fb9f7973473f PCI: starfive: Fix Runtime PM handling and teardown ordering
+2634-19a30bbb6477 PCI: plda: Fix IRQ domain leaks in the error paths of plda_init_interrupts()
+2635-26b73bae01d6 PCI: plda: Fix use-after-free of event IRQs during teardown
+2636-c6ab3b1dfa3e wifi: ath12k: Share RootPD state across UserPDs to avoid duplicate operations
+2637-96f46607bbce wifi: ath12k: add AHB platform descriptor support
+2638-43c521c11ce8 wifi: ath12k: skip MLO multicast links during crash recovery in Tx path
+2639-534459ac562b wifi: ath12k: Use different RX release ring sizes as per memory profiles
+2640-0090ec7ad252 wifi: ath12k: rename firmware_mode enum members to use QMI namespace
+2641-0702eddffff1 wifi: ath12k: move firmware_mode enum to qmi.h
+2642-8e415b806848 wifi: ath12k: validate TLV length in process_tpc_stats()
+2643-878654eb78c6 wifi: ath12k: fix overreads in ath12k_wmi_process_csa_switch_count_event()
+2644-9cb1b6a781ab PCI: Use standard wait times for PCIe link monitoring
+2645-2162572d34c5 PCI: vmd: Only copy root bridge _OSC control flags in bare metal OS
+2646-9f46f9d696d3 PCI: qcom: Rename qcom_pcie_set_slot_nccs() to qcom_pcie_set_slot_cap()
+2647-7678e81498e2 PCI: imx6: Fix i.MX6Q/DL boot hang caused by improper PHY power sequencing
+2648-650a21e0bfe4 Merge tag 'ath-current-20260727' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+2649-edc84a9396ac Merge tag 'wireless-2026-07-26' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+2650-469d7e6077c1 wifi: ath12k: resolve PENDING ML peer ID from MLO_PEER_MAP HTT event
+2651-a7619b3bcba4 wifi: ath12k: defer dp_peer registration when firmware allocates MLD peer ID
+2652-1726a7a10c4f wifi: ath12k: do not advertise MLD peer ID for firmware-allocate devices
+2653-378e659029d5 wifi: ath12k: introduce host_alloc_ml_id hardware parameter
+2654-a08455ee85a2 wifi: ath12k: add support for HTT_T2H_MSG_TYPE_MLO_RX_PEER_MAP
+2655-dd121ed779dd wifi: ath12k: keep ATH12K_PEER_ML_ID_VALID set in ath12k_sta::ml_peer_id
+2656-21ca38bb6b53 wifi: ath12k: factor out peer assoc send-and-wait into a helper
+2657-47abd2ca2815 wifi: ath12k: fix out-of-bounds clear_bit in ath12k_mac_dp_peer_cleanup()
+2658-888b1934642b PCI: Move Spacemit vendor and device IDs to linux/pci_ids.h
+2659-3b536db8fb32 net: qrtr: restrict socket creation to the initial network namespace
+2660-90883c513ca0 Merge tag 'ath-next-20260722' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+2661-fec15bb3dab0 Merge tag 'wireless-2026-07-22' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless
+2662-7698656a2f7b wifi: ath12k: Avoid buffer overread in ath12k_wmi_op_rx()
+2663-c42b27336eef wifi: ath12k: fix survey indexing across bands
+2664-af50baccaa5f wifi: ath12k: Set DTIM policy to stick mode for station interface
+2665-d6850f1984eb wifi: ath12k: Constify struct ath12k_dp_arch_ops
+2666-6c90f68f97de wifi: ath12k: fix scan command endianness on big endian
+2667-7b0bd40e97a0 wifi: ath12k: Correctly copy the hint BSSID in WMI scan request
+2668-42399be44b13 wifi: ath12k: allocate HOST_DDR and BDF regions after Q6 RO region
+2669-ecb517f97e62 wifi: ath12k: refactor QMI memory assignment
+2670-3fe59edd1901 wifi: ath12k: switch to name-based reserved memory lookup
+2671-e23d90cfcbe2 wifi: ath12k: Set congestion control max MSDU count
+2672-408ec3ffcc76 wifi: ath12k: update IPQ5332 BDF address offset
+2673-ff651212f2e2 wifi: ath12k: fix ML-STA authentication timeout on QCC2072
+2674-be72d6aecea4 wifi: ath12k: Set IEEE80211_OFFLOAD_ENCAP_4ADDR after tx_encap_type vdev param
+2675-7147a7bfce47 PCI: j721e: Fix incorrect max_lanes for J7200
+2676-ff194cffd586 net: qrtr: ns: Raise node count limit to 512
+2677-72b32eccbcd5 PCI: vmd: Handle BUS_RESTRICT_CFG value 3 for Arrow Lake-HX
+2678-b55a04ebb52d Merge tag 'ath-current-20260713' of git://git.kernel.org/pub/scm/linux/kernel/git/ath/ath
+2679-f944349dcbae PCI: aspeed: Switch to irq_domain_create_linear()
+2680-008cb88edb41 PCI: host-generic: Fix NULL pointer dereference on 32-bit CAM systems
+2681-c2b9620359b7 PCI: imx6: Add runtime PM support for i.MX95
+2682-b4bee12ebecc PCI: imx6: Keep i.MX6 Root Port MSI/MSI-X Capabilities with iMSI-RX to work around hardware bug
+2683-e145af8c1447 PCI: spacemit: Add missing MODULE_DEVICE_TABLE()
+2684-22877a061f81 PCI: starfive: Fix resource leaks on error paths in host_init()
+2685-b030905bf5a6 PCI: vmd: Add feature to scan BIOS-enumerated devices
+2686-8d6af27c0a73 PCI: rcar-gen4: Configure AXIINTC if iMSI-RX is not used
+2687-2077ccb9baa2 PCI: mediatek: Add support for EcoNet EN7528 SoC
+2688-6fc5fcd8ec1b PCI: dwc: Use common speed conversion function
+2689-d70e964dc099 PCI: cadence: Add LGA IP debugfs for LTSSM status
+2690-ea34744eb094 PCI: cadence: Add HPA IP debugfs for LTSSM status
+2691-b5672f9463f2 PCI: cadence: Add HPA architecture flag
+2692-3260336defeb PCI: keystone: Fix OF node reference leak in init
+2693-4869db344e76 PCI: xgene: Drop unnecessary OF node reference
+2694-b93c1dc44684 wifi: ath12k: add QMI capability negotiation for dynamic memory mode
+2695-9eb29fd47595 wifi: ath12k: fix rx_mpdu_start layout for QCC2072
+2696-6b31c3451b12 wifi: ath12k: Reduce RX SRNG interrupt timer threshold to 200us
+2697-6385fd09a399 wifi: ath12k: Fix ath12k_wifi7_mac_op_tx() style issues
+2698-01cc0f59aac3 wifi: ath12k: fix MLO peer delete race
+2699-f066e1a93703 wifi: ath12k: fix dp_link_peer dangling references on AP vdev rollback
+2700-d418509383b0 wifi: ath12k: Switch to generic PAS TZ APIs
+2701-70231dcd7822 wifi: ath12k: fix NULL pointer dereference in rhash table destroy
+2702-a2fe9dc70f3b wifi: ath12k: Fix low MLO RX throughput on WCN7850
+2703-f26b1c697a2b PCI: imx6: Add 'skip_pwrctrl_off' flag support
+2704-2c5768344f88 PCI: imx6: Move pci_pwrctrl_create_devices() to imx_pcie_probe()
+2705-09aad32189e4 PCI: dwc: Move iMSI-RX check before calling 'pp->ops->init()'
+2706-55f3aa06951c wifi: ath12k: Flush the posted write after writing to PCIE_SOC_GLOBAL_RESET
+2707-93aac16f1eb9 PCI: cadence: Add missing MODULE_DEVICE_TABLE()
+2708-6f12862600bb bus: mhi: ep: Fix device refcount leak in the error path of MHI device creation
+2709-22568e8f13a4 bus: mhi: core: Fix sys error transition latency
+2710-3edb3a038d42 PCI: qcom: Skip PERST# GPIOs provided by downstream PCIe devices
+2711-533171173882 PCI: qcom: Add support for Hawi
+2712-84442442e04b wifi: cfg80211: remove WIPHY_FLAG_DISABLE_WEXT
+2713-995832b2cebe Replace <linux/mod_devicetable.h> by more specific <linux/device-id/*.h> (c files)
+2714-7f4d9901eb1f PCI: imx6: Fix building against PCI_PWRCTRL_GENERIC
+2715-d4e0984f12ea PCI: imx6: Fix building against PCI_HOST_COMMON
+2716-913998f903fb wifi: ath12k: correct monitor destination ring size
+2717-58aeb412495a wifi: ath12k: change MAC buffer ring size to 4096
+2718-56f8f12c1a3c wifi: ath12k: Skip peer link info update in rx_status for monitor MSDUs
+2719-5a2b5d6a5a4a wifi: ath12k: Skip setting RX_FLAG_8023 for Ethernet-II (DIX) frames in monitor mode
+2720-b1d8d626e206 wifi: ath12k: Show per-radio center freq in dp stats
+2721-6cc84fce7b99 wifi: ath12k: Add timestamp to dp stats display
+2722-34620d1890cc wifi: ath12k: Use runtime device count in dp stats display
+2723-e47d6c9bb416 wifi: ath12k: Advertise multicast Ethernet encapsulation offload support
+2724-784f7dabf5d3 wifi: ath12k: advertise ieee_link_id in vdev start MLO params
+2725-fe2b006c15f6 wifi: ath12k: reset REOQ LUT addresses before firmware stop
+2726-c2d60ab8e382 wifi: ath12k: expand UserPD ID mask to support up to 8 PDs
+2727-fffa54aeaeb2 wifi: ath12k: tighten RX monitor TLV bounds check
+2728-4c09bbf0c1e1 wifi: ath12k: add dp_mon support 32-bit TLV headers
+2729-9d1d61121b05 wifi: ath12k: add HAL ops for monitor TLV header decode and alignment
+2730-e264a3dbe866 wifi: ath12k: refactor HAL TLV32/64 decode helpers
+2731-d762bbc08ca7 wifi: ath12k: fix TLV32 length mask
+2732-eaf478b3ea68 wifi: ath12k: avoid setting 320MHz support on non 6GHz band
+2733-007b638ed724 wifi: ath12k: remove unused QMI definitions
+2734-26d529b99861 wifi: ath12k: use %u for unsigned variables in QMI debug logs
+2735-c29d1550e166 wifi: ath12k: Fix inconsistencies in struct qmi_elem_info initializers
+2736-74e1a4762c79 wifi: ath12k: enable threaded NAPI when DP IRQ affinity is unavailable
+2737-40fb390cbcc1 PCI: meson: Fix GPIO state while requesting PERST#
+2738-3567bcf0e985 PCI: host-generic: Move legacy DT binding fallback decision to caller of pci_host_common_parse_ports()
+2739-007c7304d80f PCI: rzg3s-host: Add support for RZ/V2H(P) SoC
+2740-9f2ed7c3de5d PCI: rzg3s-host: Prepare System Controller handling for multiple controllers
+2741-e2260454946d PCI: rzg3s-host: Use shared reset controls for power domain resets
+2742-26ae421f7f49 Merge tag 'pci-v7.2-changes' of git://git.kernel.org/pub/scm/linux/kernel/git/pci/pci
+2743-2c2fb7a8aa10 Merge branch 'pci/misc'
+2744-e5eb7036ac4f Merge branch 'pci/controller/misc'
+2745-78e531d3e5a7 Merge branch 'pci/controller/tlp_macros'
+2746-7c97ee7c4951 Merge branch 'pci/controller/rescan_lock'
+2747-dd81c6524b3d Merge branch 'pci/controller/link_train_delay'
+2748-01b5f1d052b6 Merge branch 'pci/controller/rcar-host'
+2749-878ec1809949 Merge branch 'pci/controller/mvebu'
+2750-4e38ddba805a Merge branch 'pci/controller/mediatek-gen3'
+2751-7b9001901259 Merge branch 'pci/controller/mediatek'
+2752-a5c8e1ffe9d9 Merge branch 'pci/controller/loongson'
+2753-d04ef0d3b44e Merge branch 'pci/controller/iproc-bcma'
+2754-97eee6d7769a Merge branch 'pci/controller/dwc-ultrarisc'
+2755-81c4ead83ece Merge branch 'pci/controller/dwc-tegra194'
+2756-9cd6b3cae021 Merge branch 'pci/controller/dwc-qcom'
+2757-c08c02e749b5 Merge branch 'pci/controller/dwc-meson'
+2758-87edaec53641 Merge branch 'pci/controller/dwc-intel-gw'
+2759-878f37d6dea3 Merge branch 'pci/controller/dwc-imx6'
+2760-1d0f97d5f8e9 Merge branch 'pci/controller/dwc-amd-mdb'
+2761-bcb446d61dd2 Merge branch 'pci/controller/dwc'
+2762-bf27eed04093 Merge branch 'pci/controller/altera'
+2763-34de2910286c Merge branch 'pci/controller/host-common'
+2764-ae385ca81232 Merge branch 'pci/endpoint'
+2765-2b0d1a605ef2 PCI: rzg3s-host: Use common pci_host_common_link_train_delay() helper
+2766-d24e3fab6ee2 PCI: mediatek-gen3: Add 100 ms delay after link up
+2767-6bba1de54ceb PCI: aardvark: Add 100 ms delay after link training
+2768-0a46957df45a PCI: dwc: Use common pci_host_common_link_train_delay() helper
+2769-57d3400df052 PCI: cadence-hpa: Add post-link delay
+2770-0000d9ccbcfa Merge tag 'char-misc-7.2-rc1' of git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/char-misc
+2771-fda8749ba736 PCI: host-common: Request bus reassignment when not probe-only
+2772-0bd9611587bb PCI: rockchip: Protect root bus removal with rescan lock
+2773-4e4f9745f016 PCI: plda: Protect root bus removal with rescan lock
+2774-a29812a55da8 PCI: mediatek: Protect root bus removal with rescan lock
+2775-a6a64e150f12 PCI: iproc: Protect root bus removal with rescan lock
+2776-26335696498a PCI: dwc: Protect root bus removal with rescan lock
+2777-713331969ce8 PCI: cadence: Protect root bus removal with rescan lock
+2778-20b7aba83c0e PCI: brcmstb: Protect root bus removal with rescan lock
+2779-a8759c8ac48c PCI: altera: Protect root bus removal with rescan lock
+2780-3c2e6cc6affa PCI: iproc: Restore .map_irq() for the platform bus driver
+2781-7cb033507068 PCI: mvebu: Use fixed-width interrupt masks to avoid truncation in 64-bit builds
+2782-09fb6892f34a Merge tag 'devicetree-for-7.2' of git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux
+2783-70cb95c73680 Merge tag 'soc-drivers-7.2' of git://git.kernel.org/pub/scm/linux/kernel/git/soc/soc
+2784-d755d45bc08a Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+2785-20054869770c net: qrtr: fix 32-bit integer overflow in qrtr_endpoint_post()
+2786-f71f07bee9b5 of: Factor arguments passed to of_map_id() into a struct
+2787-d4b52f83f198 of: Add convenience wrappers for of_map_id()
+2788-26b67fa10ef8 PCI: dwc: Avoid dwc_pcie_rasdes_debugfs_deinit() NULL dereference when no RAS DES capability
+2789-dad4d4b92a9b Merge git://git.kernel.org/pub/scm/linux/kernel/git/netdev/net
+2790-ebc1d9906894 PCI: mediatek: Use actual physical address instead of virt_to_phys()
+2791-6ba90ce2069a PCI: rcar-host: Remove unused LIST_HEAD(res)
+2792-972c4dd19cb9 Merge tag 'wireless-next-2026-06-10' of https://git.kernel.org/pub/scm/linux/kernel/git/wireless/wireless-next
+2793-85c1fcfa740d PCI: imx6: Integrate new pwrctrl API
+2794-f865a57896bd PCI: mediatek: Fix IRQ domain leak when port fails to enable
+2795-4b0dc84b2939 PCI: meson: Add missing remove callback
+2796-b12341b98d5a PCI: meson: Propagate devm_add_action_or_reset() failure
+2797-9dda3f83ba67 PCI: imx6: Assert ref_clk_en after reference clock stabilizes on i.MX95
+2798-0c26b1c34d12 PCI: imx6: Configure REF_USE_PAD before PHY reset for i.MX95
+2799-869317b95fd7 PCI: cadence: Add post-link delay for LGA and j721e glue driver
+2800-29fbf582e750 PCI: Add pci_host_common_link_train_delay() helper
+2801-52015335e5db PCI: cadence: Use common TLP type macros
+2802-3136184508d2 PCI: dwc: Replace ATU type macros with common TLP type macros
+2803-286db45fb7ef PCI: Add common TLP type macros and convert aspeed/mediatek
+2804-63abe299b12b wifi: ath12k: enable IEEE80211_VHT_EXT_NSS_BW_CAPABLE when NSS ratio is reported
+2805-fdea4d44e4b9 wifi: ath12k: fix EAPOL TX failure caused by stale tcl_metadata bits
+2806-1c316d02c399 wifi: ath12k: Update Qualcomm copyrights
+2807-282305d7e9c0 PCI: mediatek: Fix operator precedence in PCIE_FTS_NUM_L0 macro
+
+===== 8. SALAMI DTS WIFI/PCI =====
+12831-08a6ee580771 Merge tag 'net-next-qcom-soc-4.7-2-merge' of git://github.com/andersson/kernel
+12832-a986a05de95b net: qrtr: fix build problems
+12833-f79a917e69e1 Merge tag 'qcom-soc-for-4.7-2' into net-next
+12834-bdabad3e363d net: Add Qualcomm IPC router
+12835-
+12836:=== 19. SALAMI DTS WIFI / PCI / MHI REFERENCES ===
+12837-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:190:		adsp_mhi_mem: adsp-mhi-region@81f00000 {
+12838-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:371:	wcn7850-pmu {
+12839-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:372:		compatible = "qcom,wcn7850-pmu";
+12840-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:375:		pinctrl-0 = <&wlan_en>, <&bt_default>, <&pmk8550_sleep_clk>;
+12841-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:377:		wlan-enable-gpios = <&tlmm 80 GPIO_ACTIVE_HIGH>;
+12842-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:378:		bt-enable-gpios = <&tlmm 81 GPIO_ACTIVE_HIGH>;
+12843-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:404:			vreg_pmu_btcmx_0p85: ldo4 {
+12844-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:405:				regulator-name = "vreg_pmu_btcmx_0p85";
+12845-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:420:			vreg_pmu_pcie_0p9: ldo8 {
+12846-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:421:				regulator-name = "vreg_pmu_pcie_0p9";
+12847-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:424:			vreg_pmu_pcie_1p8: ldo9 {
+12848-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:425:				regulator-name = "vreg_pmu_pcie_1p8";
+12849-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1064:&pcie0 {
+12850-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1066:	pinctrl-0 = <&pcie0_default_state>;
+12851-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1071:&pcie0_port0 {
+12852-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1076:	wifi@0 {
+12853-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1077:		compatible = "pci17cb,1107";
+12854-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1087:		vddpcie0p9-supply = <&vreg_pmu_pcie_0p9>;
+12855-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1088:		vddpcie1p8-supply = <&vreg_pmu_pcie_1p8>;
+12856-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1093:&pcie0_phy {
+12857-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1100:&pcie1 {
+12858-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1105:	pinctrl-0 = <&pcie1_default_state>;
+12859-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1110:&pcie1_phy {
+12860-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1282:	bt_default: bt-default-state {
+12861-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1283:		bt-en-pins {
+12862-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1327:	wlan_en: wlan-en-state {
+12863-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1443:	bluetooth {
+12864-arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts:1444:		compatible = "qcom,wcn7850-bt";
+12865-arch/arm64/boot/dts/qcom/sm8550.dtsi:958:		adsp_mhi_mem: adsp-mhi-region@81f00000 {
+12866-arch/arm64/boot/dts/qcom/sm8550.dtsi:1257:				 <&pcie0_phy>,
+12867-arch/arm64/boot/dts/qcom/sm8550.dtsi:1258:				 <&pcie1_phy QMP_PCIE_PIPE_CLK>,
+12868-arch/arm64/boot/dts/qcom/sm8550.dtsi:1259:				 <&pcie1_phy QMP_PCIE_PHY_AUX_CLK>,
+12869-arch/arm64/boot/dts/qcom/sm8550.dtsi:2346:		pcie_noc: interconnect@16c0000 {
+12870-arch/arm64/boot/dts/qcom/sm8550.dtsi:2347:			compatible = "qcom,sm8550-pcie-anoc";
+12871-arch/arm64/boot/dts/qcom/sm8550.dtsi:2350:			clocks = <&gcc GCC_AGGRE_NOC_PCIE_AXI_CLK>,
+12872-arch/arm64/boot/dts/qcom/sm8550.dtsi:2351:				 <&gcc GCC_CFG_NOC_PCIE_ANOC_AHB_CLK>;
+12873-arch/arm64/boot/dts/qcom/sm8550.dtsi:2384:		pcie0: pcie@1c00000 {
+12874-arch/arm64/boot/dts/qcom/sm8550.dtsi:2385:			device_type = "pci";
+12875-arch/arm64/boot/dts/qcom/sm8550.dtsi:2386:			compatible = "qcom,pcie-sm8550";
+12876-arch/arm64/boot/dts/qcom/sm8550.dtsi:2398:				    "mhi";
+12877-arch/arm64/boot/dts/qcom/sm8550.dtsi:2407:			linux,pci-domain = <0>;
+12878-arch/arm64/boot/dts/qcom/sm8550.dtsi:2435:			clocks = <&gcc GCC_PCIE_0_AUX_CLK>,
+12879-arch/arm64/boot/dts/qcom/sm8550.dtsi:2436:				 <&gcc GCC_PCIE_0_CFG_AHB_CLK>,
+12880-arch/arm64/boot/dts/qcom/sm8550.dtsi:2437:				 <&gcc GCC_PCIE_0_MSTR_AXI_CLK>,
+12881-arch/arm64/boot/dts/qcom/sm8550.dtsi:2438:				 <&gcc GCC_PCIE_0_SLV_AXI_CLK>,
+12882-arch/arm64/boot/dts/qcom/sm8550.dtsi:2439:				 <&gcc GCC_PCIE_0_SLV_Q2A_AXI_CLK>,
+12883-arch/arm64/boot/dts/qcom/sm8550.dtsi:2440:				 <&gcc GCC_DDRSS_PCIE_SF_QTB_CLK>,
+12884-arch/arm64/boot/dts/qcom/sm8550.dtsi:2441:				 <&gcc GCC_AGGRE_NOC_PCIE_AXI_CLK>;
+12885-arch/arm64/boot/dts/qcom/sm8550.dtsi:2450:			interconnects = <&pcie_noc MASTER_PCIE_0 QCOM_ICC_TAG_ALWAYS
+12886-arch/arm64/boot/dts/qcom/sm8550.dtsi:2453:					 &cnoc_main SLAVE_PCIE_0 QCOM_ICC_TAG_ACTIVE_ONLY>;
+12887-arch/arm64/boot/dts/qcom/sm8550.dtsi:2454:			interconnect-names = "pcie-mem", "cpu-pcie";
+12888-arch/arm64/boot/dts/qcom/sm8550.dtsi:2461:			resets = <&gcc GCC_PCIE_0_BCR>;
+12889-arch/arm64/boot/dts/qcom/sm8550.dtsi:2462:			reset-names = "pci";
+12890-arch/arm64/boot/dts/qcom/sm8550.dtsi:2464:			power-domains = <&gcc PCIE_0_GDSC>;
+12891-arch/arm64/boot/dts/qcom/sm8550.dtsi:2466:			phys = <&pcie0_phy>;
+12892-arch/arm64/boot/dts/qcom/sm8550.dtsi:2467:			phy-names = "pciephy";
+12893-arch/arm64/boot/dts/qcom/sm8550.dtsi:2469:			operating-points-v2 = <&pcie0_opp_table>;
+12894-arch/arm64/boot/dts/qcom/sm8550.dtsi:2473:			pcie0_opp_table: opp-table {
+12895-arch/arm64/boot/dts/qcom/sm8550.dtsi:2525:			pcie0_port0: pcie@0 {
+12896-arch/arm64/boot/dts/qcom/sm8550.dtsi:2526:				device_type = "pci";
+12897-arch/arm64/boot/dts/qcom/sm8550.dtsi:2536:		pcie0_phy: phy@1c06000 {
+12898-arch/arm64/boot/dts/qcom/sm8550.dtsi:2537:			compatible = "qcom,sm8550-qmp-gen3x2-pcie-phy";
+12899-arch/arm64/boot/dts/qcom/sm8550.dtsi:2540:			clocks = <&gcc GCC_PCIE_0_AUX_CLK>,
+12900-arch/arm64/boot/dts/qcom/sm8550.dtsi:2541:				 <&gcc GCC_PCIE_0_CFG_AHB_CLK>,
+12901-arch/arm64/boot/dts/qcom/sm8550.dtsi:2542:				 <&tcsr TCSR_PCIE_0_CLKREF_EN>,
+12902-arch/arm64/boot/dts/qcom/sm8550.dtsi:2543:				 <&gcc GCC_PCIE_0_PHY_RCHNG_CLK>,
+12903-arch/arm64/boot/dts/qcom/sm8550.dtsi:2544:				 <&gcc GCC_PCIE_0_PIPE_CLK>;
+12904-arch/arm64/boot/dts/qcom/sm8550.dtsi:2548:			resets = <&gcc GCC_PCIE_0_PHY_BCR>;
+12905-arch/arm64/boot/dts/qcom/sm8550.dtsi:2551:			assigned-clocks = <&gcc GCC_PCIE_0_PHY_RCHNG_CLK>;
+12906-arch/arm64/boot/dts/qcom/sm8550.dtsi:2554:			power-domains = <&gcc PCIE_0_PHY_GDSC>;
+12907-arch/arm64/boot/dts/qcom/sm8550.dtsi:2557:			clock-output-names = "pcie0_pipe_clk";
+12908-arch/arm64/boot/dts/qcom/sm8550.dtsi:2564:		pcie1: pcie@1c08000 {
+12909-arch/arm64/boot/dts/qcom/sm8550.dtsi:2565:			device_type = "pci";
+12910-arch/arm64/boot/dts/qcom/sm8550.dtsi:2566:			compatible = "qcom,pcie-sm8550";
+12911-arch/arm64/boot/dts/qcom/sm8550.dtsi:2578:				    "mhi";
+12912-arch/arm64/boot/dts/qcom/sm8550.dtsi:2587:			linux,pci-domain = <1>;
+12913-arch/arm64/boot/dts/qcom/sm8550.dtsi:2615:			clocks = <&gcc GCC_PCIE_1_AUX_CLK>,
+12914-arch/arm64/boot/dts/qcom/sm8550.dtsi:2616:				 <&gcc GCC_PCIE_1_CFG_AHB_CLK>,
+12915-arch/arm64/boot/dts/qcom/sm8550.dtsi:2617:				 <&gcc GCC_PCIE_1_MSTR_AXI_CLK>,
+12916-arch/arm64/boot/dts/qcom/sm8550.dtsi:2618:				 <&gcc GCC_PCIE_1_SLV_AXI_CLK>,
+12917-arch/arm64/boot/dts/qcom/sm8550.dtsi:2619:				 <&gcc GCC_PCIE_1_SLV_Q2A_AXI_CLK>,
+12918-arch/arm64/boot/dts/qcom/sm8550.dtsi:2620:				 <&gcc GCC_DDRSS_PCIE_SF_QTB_CLK>,
+12919-arch/arm64/boot/dts/qcom/sm8550.dtsi:2621:				 <&gcc GCC_AGGRE_NOC_PCIE_AXI_CLK>,
+12920-arch/arm64/boot/dts/qcom/sm8550.dtsi:2622:				 <&gcc GCC_CNOC_PCIE_SF_AXI_CLK>;
+12921-arch/arm64/boot/dts/qcom/sm8550.dtsi:2632:			assigned-clocks = <&gcc GCC_PCIE_1_AUX_CLK>;
+12922-arch/arm64/boot/dts/qcom/sm8550.dtsi:2635:			interconnects = <&pcie_noc MASTER_PCIE_1 QCOM_ICC_TAG_ALWAYS
+12923-arch/arm64/boot/dts/qcom/sm8550.dtsi:2638:					 &cnoc_main SLAVE_PCIE_1 QCOM_ICC_TAG_ACTIVE_ONLY>;
+12924-arch/arm64/boot/dts/qcom/sm8550.dtsi:2639:			interconnect-names = "pcie-mem", "cpu-pcie";
+12925-arch/arm64/boot/dts/qcom/sm8550.dtsi:2646:			resets = <&gcc GCC_PCIE_1_BCR>,
+12926-arch/arm64/boot/dts/qcom/sm8550.dtsi:2647:				<&gcc GCC_PCIE_1_LINK_DOWN_BCR>;
+12927-arch/arm64/boot/dts/qcom/sm8550.dtsi:2648:			reset-names = "pci", "link_down";
+12928-arch/arm64/boot/dts/qcom/sm8550.dtsi:2650:			power-domains = <&gcc PCIE_1_GDSC>;
+12929-arch/arm64/boot/dts/qcom/sm8550.dtsi:2652:			phys = <&pcie1_phy>;
+12930-arch/arm64/boot/dts/qcom/sm8550.dtsi:2653:			phy-names = "pciephy";
+12931-arch/arm64/boot/dts/qcom/sm8550.dtsi:2655:			operating-points-v2 = <&pcie1_opp_table>;
+12932-arch/arm64/boot/dts/qcom/sm8550.dtsi:2659:			pcie1_opp_table: opp-table {
+12933-arch/arm64/boot/dts/qcom/sm8550.dtsi:2727:			pcie1_port0: pcie@0 {
+12934-arch/arm64/boot/dts/qcom/sm8550.dtsi:2728:				device_type = "pci";
+12935-arch/arm64/boot/dts/qcom/sm8550.dtsi:2738:		pcie1_phy: phy@1c0e000 {
+12936-arch/arm64/boot/dts/qcom/sm8550.dtsi:2739:			compatible = "qcom,sm8550-qmp-gen4x2-pcie-phy";
+12937-arch/arm64/boot/dts/qcom/sm8550.dtsi:2742:			clocks = <&gcc GCC_PCIE_1_PHY_AUX_CLK>,
+12938-arch/arm64/boot/dts/qcom/sm8550.dtsi:2743:				 <&gcc GCC_PCIE_1_CFG_AHB_CLK>,
+12939-arch/arm64/boot/dts/qcom/sm8550.dtsi:2744:				 <&tcsr TCSR_PCIE_1_CLKREF_EN>,
+12940-arch/arm64/boot/dts/qcom/sm8550.dtsi:2745:				 <&gcc GCC_PCIE_1_PHY_RCHNG_CLK>,
+12941-arch/arm64/boot/dts/qcom/sm8550.dtsi:2746:				 <&gcc GCC_PCIE_1_PIPE_CLK>;
+12942-arch/arm64/boot/dts/qcom/sm8550.dtsi:2750:			resets = <&gcc GCC_PCIE_1_PHY_BCR>,
+12943-arch/arm64/boot/dts/qcom/sm8550.dtsi:2751:				 <&gcc GCC_PCIE_1_NOCSR_COM_PHY_BCR>;
+12944-arch/arm64/boot/dts/qcom/sm8550.dtsi:2754:			assigned-clocks = <&gcc GCC_PCIE_1_PHY_RCHNG_CLK>;
+12945-arch/arm64/boot/dts/qcom/sm8550.dtsi:2757:			power-domains = <&gcc PCIE_1_PHY_GDSC>;
+12946-arch/arm64/boot/dts/qcom/sm8550.dtsi:2760:			clock-output-names = "pcie1_pipe_clk";
+12947-arch/arm64/boot/dts/qcom/sm8550.dtsi:5210:			pcie0_default_state: pcie0-default-state {
+12948-arch/arm64/boot/dts/qcom/sm8550.dtsi:5220:					function = "pcie0_clk_req_n";
+12949-arch/arm64/boot/dts/qcom/sm8550.dtsi:5233:			pcie1_default_state: pcie1-default-state {
+12950-arch/arm64/boot/dts/qcom/sm8550.dtsi:5243:					function = "pcie1_clk_req_n";
+12951-
+12952-=== 20. KERNEL VERSION / SOURCE VERSION ===
+12953-7.3.0-rc5
+12954-
+12955-v7.3-rc5-90-g33de5a8680b5-dirty
+12956-
+12957-=== 21. UNCOMMITTED DIFF SUMMARY ===
+12958- arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts | 8 ++------
+12959- 1 file changed, 2 insertions(+), 6 deletions(-)
+12960-
+12961-M	arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12962-
+12963-=== 22. UNCOMMITTED DTS DIFF ===
+12964-diff --git a/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts b/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12965-index 61e6d49e6aa8..f9bc943e9e47 100644
+12966---- a/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12967-+++ b/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12968-@@ -1062,9 +1062,6 @@ &mdss_dsi0_phy {
+12969- };
+12970- 
+12971- &pcie0 {
+12972--	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
+12973--	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
+12974--
+12975- 	pinctrl-names = "default";
+12976- 	pinctrl-0 = <&pcie0_default_state>;
+12977- 
+12978-@@ -1073,6 +1070,8 @@ &pcie0 {
+12979- 
+12980- &pcie0_port0 {
+12981- 	status = "okay";
+12982-+	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
+12983-+	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
+12984- 	
+12985- 	wifi@0 {
+12986- 		compatible = "pci17cb,1107";
+12987-@@ -1221,9 +1220,6 @@ &remoteproc_cdsp {
+12988- 	status = "okay";
+12989- };
+12990- 
+12991--
+12992--
+12993--
+12994- &remoteproc_mpss {
+12995- 	firmware-name = "qcom/sm8550/salami/modem.mbn",
+12996- 			"qcom/sm8550/salami/modem_dtb.mbn";
+12997-
+12998-============================================================
+12999- END
+13000-============================================================
+
+===== 9. UNCOMMITTED DTS DIFF =====
+12952-=== 20. KERNEL VERSION / SOURCE VERSION ===
+12953-7.3.0-rc5
+12954-
+12955-v7.3-rc5-90-g33de5a8680b5-dirty
+12956-
+12957:=== 21. UNCOMMITTED DIFF SUMMARY ===
+12958- arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts | 8 ++------
+12959- 1 file changed, 2 insertions(+), 6 deletions(-)
+12960-
+12961-M	arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12962-
+12963:=== 22. UNCOMMITTED DTS DIFF ===
+12964-diff --git a/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts b/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12965-index 61e6d49e6aa8..f9bc943e9e47 100644
+12966---- a/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12967-+++ b/arch/arm64/boot/dts/qcom/sm8550-oneplus-salami.dts
+12968-@@ -1062,9 +1062,6 @@ &mdss_dsi0_phy {
+12969- };
+12970- 
+12971- &pcie0 {
+12972--	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
+12973--	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
+12974--
+12975- 	pinctrl-names = "default";
+12976- 	pinctrl-0 = <&pcie0_default_state>;
+12977- 
+12978-@@ -1073,6 +1070,8 @@ &pcie0 {
+12979- 
+12980- &pcie0_port0 {
+12981- 	status = "okay";
+12982-+	wake-gpios = <&tlmm 96 GPIO_ACTIVE_HIGH>;
+12983-+	perst-gpios = <&tlmm 94 GPIO_ACTIVE_LOW>;
+12984- 	
+12985- 	wifi@0 {
+12986- 		compatible = "pci17cb,1107";
+12987-@@ -1221,9 +1220,6 @@ &remoteproc_cdsp {
+12988- 	status = "okay";
+12989- };
+12990- 
+12991--
+12992--
+12993--
+12994- &remoteproc_mpss {
+12995- 	firmware-name = "qcom/sm8550/salami/modem.mbn",
+12996- 			"qcom/sm8550/salami/modem_dtb.mbn";
+12997-
+12998-============================================================
+12999- END
+13000-============================================================
